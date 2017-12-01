@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.harun.myflower.MainActivity">
+
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/listView"
+        android:layout_toEndOf="@+id/textView" />
 
     <TextView
         android:id="@+id/datareceived"
@@ -14,6 +22,90 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.435" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/datareceived2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="327dp"
+        android:layout_below="@id/datareceived"
+        />
+
+    <TextView
+        android:id="@+id/datareceived3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_below="@id/datareceived2"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="427dp" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/datareceived4"
+        android:layout_marginTop="29dp" />
+
+    <TextView
+        android:id="@+id/datareceived4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/datareceived3"
+        android:text="TextView"
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/datareceived4"
+        android:layout_marginTop="10dp"
+        android:text="                  Tarih                     "
+        android:textAlignment="viewStart"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/textView"
+        android:text="Sıcaklık"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/textView2"
+        android:text="Nem"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView3"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_marginStart="23dp"
+        android:layout_toEndOf="@+id/textView3"
+        android:text="Işık"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textStyle="bold" />
+
+</RelativeLayout>
