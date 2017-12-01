@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     ChartHelper mChart;
     LineChart chart;
 
-int k;
+
 
     ListView lv;
     ArrayAdapter adapter;
