@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     ChartHelper mChart;
     LineChart chart;
 
-
+int k;
 
     ListView lv;
     ArrayAdapter adapter;
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     String nem_Veri[];
     String isik_Veri[];
     String tum_Veri[];
-    int k = 65;
+    int k = 88;
     int id_Veri[];
     String tarih_Veri[];
 
