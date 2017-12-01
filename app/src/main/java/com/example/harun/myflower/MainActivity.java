@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     String tum_Veri[];
     int id_Veri[];
     String tarih_Veri[];
+    int q;
 
 
 
