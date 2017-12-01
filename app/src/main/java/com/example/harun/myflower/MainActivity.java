@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     String nem_Veri[];
     String isik_Veri[];
     String tum_Veri[];
-    int k = 88;
+
     int id_Veri[];
     String tarih_Veri[];
 
