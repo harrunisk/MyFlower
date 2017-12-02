@@ -1,15 +1,13 @@
 package com.example.harun.myflower;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -22,11 +20,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 
-import helpers.MqttHelper;
 import helpers.ChartHelper;
+import helpers.MqttHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     ChartHelper mChart;
     LineChart chart;
 
-int k;
 
     ListView lv;
     ArrayAdapter adapter;

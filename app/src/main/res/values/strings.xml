@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyFlower</string>
+    <string name="kayit" ><u>Kayit OL</u>
+    </string>
 </resources>
