@@ -42,8 +42,13 @@ public class Login extends AppCompatActivity {
 
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         editor = preferences.edit(); //
+
         String mail = preferences.getString("email", "");
         username.setText(mail);
+        String sifre=preferences.getString("sifre","");
+        pasword.setText(sifre);
+
+
        /* if(preferences.getBoolean("login", false)){
             Intent i = new Intent(getApplicationContext(),MainActivity.class);
             startActivity(i);
@@ -76,9 +81,9 @@ public class Login extends AppCompatActivity {
     public void sign_in() {
 
 
-        String inputEmail = username.getText().toString().trim();
+        final String inputEmail = username.getText().toString().trim();
 
-        String inputPassword = pasword.getText().toString().trim();
+        final String inputPassword = pasword.getText().toString().trim();
 
         if (TextUtils.isEmpty(inputEmail)) {
             username.setError("email girin");
@@ -102,7 +107,15 @@ public class Login extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         progressDialog.dismiss();
                         editor.putBoolean("login", true);
-                        startActivity(new Intent(Login.this, MainActivity.class));
+                        Intent i =new Intent(Login.this, MainActivity.class);
+                        i.putExtra("username",inputEmail);
+                        startActivity(i);
+
+                        editor.putString("email", inputEmail);//email değeri
+                        editor.putString("sifre", inputPassword);//şifre değeri
+                        editor.putBoolean("login", true);
+                        editor.apply();
+
                         Toast.makeText(getApplicationContext(), "Giriş Yapildi", Toast.LENGTH_SHORT).show();
                     } else {
                         progressDialog.dismiss();

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">MyFlower</string>
-    <string name="kayit" ><u>Kayit OL</u>
-    </string>
+    <string name="kayit"><u>Kayit OL</u> </string>
+    <string name="open">Ac</string>
+    <string name="kapa"><u>Kapa</u> </string>
+
 </resources>

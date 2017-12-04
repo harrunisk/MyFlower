@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="Tarlalarım"
+        android:id="@+id/tarla"
+        android:icon="@drawable/taractor"/>
+
+    <item android:title="Tarla Ekle"
+        android:id="@+id/add_tarla"
+        android:icon="@drawable/addtarla"/>
+
+    <item android:title="Ürün Fiyatları"
+        android:id="@+id/ürün_fyt"
+        android:icon="@drawable/sig"/>
+
+    <item
+        android:id="@+id/mahsül"
+        android:icon="@drawable/mahsul"
+        android:title="Mahsül Ara" />
+
+    <item android:title="Haberler"
+        android:id="@+id/haber"
+        android:icon="@drawable/news"/>
+
+    <item android:title="Ayarlar"
+        android:id="@+id/ayar"
+        android:icon="@android:drawable/arrow_up_float"/>
+
+    <item android:title="Çıkış"
+        android:id="@+id/cikis"
+        android:icon="@android:drawable/arrow_up_float"/>
+
+
+
+</menu>

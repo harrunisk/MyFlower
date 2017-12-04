@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:background="@drawable/ziraat">
+
+    <ImageView
+        android:src="@drawable/farmer"
+        android:layout_width="50dp"
+        android:layout_marginTop="30dp"
+        android:id="@+id/nav_image"
+        android:background="@null"
+        android:layout_height="50dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:textStyle="normal"
+        android:id="@+id/username"
+        android:text="Kullanici adi"/>
+
+</LinearLayout>
