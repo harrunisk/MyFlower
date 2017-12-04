@@ -127,7 +127,7 @@ public class PullAndParseXML {
                                     postItem.setImageUrl(imageUrls.get(0));
                                 } else {
                                     imageUrl = "";
-                                   // postItem.setImageUrl("http://webrazzi.com/wp-content/uploads/2016/06/Hover-kamera-318x175.png");
+                                    postItem.setImageUrl("https://www.sariyerhaberler.com/wp-content/uploads/2017/10/gulhanede-otel-iangini.png");
                                 }
                                 break;
                             case "pubDate":
