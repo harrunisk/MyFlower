@@ -42,7 +42,8 @@
             android:name=".SignupActivity"
             android:theme="@style/AppTheme2" />
         <activity android:name=".Haberler" />
-        <activity android:name=".DetailsHaber"></activity>
+        <activity android:name=".DetailsHaber" />
+        <activity android:name=".Tarla"></activity>
     </application>
 
 </manifest>

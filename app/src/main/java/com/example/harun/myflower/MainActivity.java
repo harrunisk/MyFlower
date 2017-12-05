@@ -92,8 +92,16 @@ private ActionBarDrawerToggle toolbar;
                         Intent intent = new Intent(MainActivity.this, Haberler.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
-                    }
+                        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
+                    }
+                        if(item.getItemId()==R.id.add_tarla) {
+                            Intent intent = new Intent(MainActivity.this, Tarla.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
+                        }
                     return false;
                 }
             });
