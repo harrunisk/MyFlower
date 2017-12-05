@@ -16,6 +16,7 @@ public class post_model {
     private String description;
     private String imageUrl;
     private String pubDate;
+    private String content;
     private List<String> category = new ArrayList<String>();
     private String guid;
 
@@ -30,7 +31,13 @@ public class post_model {
     public String getLink() {
         return link;
     }
+    public String getContent() {
+        return content;
+    }
 
+    public void setContent(String content) {
+        this.content = content;
+    }
     public void setLink(String link) {
         this.link = link;
     }

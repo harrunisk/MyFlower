@@ -41,7 +41,8 @@
         <activity
             android:name=".SignupActivity"
             android:theme="@style/AppTheme2" />
-        <activity android:name=".Haberler"></activity>
+        <activity android:name=".Haberler" />
+        <activity android:name=".DetailsHaber"></activity>
     </application>
 
 </manifest>

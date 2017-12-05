@@ -26,6 +26,7 @@ public class PullAndParseXML {
     private String description;
     private String imageUrl;
     private String pubDate;
+    private String content;
     private List<String> category = new ArrayList<String>();
     private String guid;
 
@@ -54,6 +55,10 @@ public class PullAndParseXML {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getContent() {
+        return content;
     }
 
     public String getPubDate() {
@@ -108,6 +113,7 @@ public class PullAndParseXML {
                         switch (name) {
                             case "item":
                                 postList.add(postItem);
+
                                 break;
                             case "title":
                                 title = text;
@@ -120,7 +126,22 @@ public class PullAndParseXML {
                             case "description":
                                 description = text;
                                 postItem.setDescription(text);
-                               // postItem.setImageUrl("http://webrazzi.com/wp-content/uploads/2016/06/Hover-kamera-318x175.png");
+
+
+                                break;
+                            case "news":
+                                content = text;
+                                postItem.setContent(text);
+                                break;
+
+                            case "pubDate":
+                                pubDate = text.substring(0,22);
+                                //text.trim();
+                                postItem.setPubDate(pubDate);
+                                break;
+
+                            case "image":
+
                                 ArrayList<String> imageUrls = getImageUrls(text);
                                 if (imageUrls.size() > 0) {
                                     imageUrl = imageUrls.get(0);
@@ -129,19 +150,18 @@ public class PullAndParseXML {
                                     imageUrl = "";
                                     postItem.setImageUrl("https://www.sariyerhaberler.com/wp-content/uploads/2017/10/gulhanede-otel-iangini.png");
                                 }
-                                break;
-                            case "pubDate":
-                                pubDate = text;
-                                postItem.setPubDate(text);
-                                break;
+                                    break;
+                            /// kategori tagı bu sıtede yo k////
+                            /*
                             case "category":
                                 category.add(text);
                                 postItem.addCategoryItem(text);
-                                break;
-                            case "guid":
+                                break;*/
+                          /*  case "guid":
                                 guid = text;
                                 postItem.setGuid(text);
-                                break;
+                                break;*/
+
                             default:
                                 break;
                         }
@@ -157,12 +177,42 @@ public class PullAndParseXML {
 
     }
 
+
+     /* String a="<div>";
+                                if(description.trim().startsWith(a)) {
+                                    System.out.println("BURASI " + description + "uzunluk " + description.length());
+                                }
+                              /*  if (postItem.getDescription().startsWith("<div>") || postItem.getDescription().endsWith("</div>")) {
+                                   String a = description.substring(1, description.length() - 1);
+                                   // description.replace("<div>", "");
+                                   // description.replace("</div>", "");
+                                    System.out.println("BURASI " + description+" burası2 "+ a );
+                                }
+*/
+    // postItem.setImageUrl("http://webrazzi.com/wp-content/uploads/2016/06/Hover-kamera-318x175.png");
+
+
+    public String removeDivTags(String inStr) {
+
+        int index = 0;
+        int index2 = 0;
+        while (index != -1) {
+            index = inStr.indexOf("<div>");
+            index2 = inStr.indexOf("</div>", index);
+            if (index != -1 && index2 != -1) {
+                inStr = inStr.substring(0, index).concat(inStr.substring(index2 + 1, inStr.length()));
+            }
+        }
+        return inStr;
+    }
+
     /**
      * GÖRSEL LİNKİNİ BULAN METODUMUZ
      *
      * @param text
      * @return
      */
+
     private ArrayList getImageUrls(String text) {
 
         ArrayList links = new ArrayList();

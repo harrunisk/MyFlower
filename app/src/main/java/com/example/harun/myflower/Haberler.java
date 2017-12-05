@@ -28,8 +28,19 @@ import java.util.regex.Pattern;
 public class Haberler extends AppCompatActivity {
     TextView username;
     private String TAG = getClass().getSimpleName();
-    // RSS İ ÇEKECEĞİMİZ ADRES - WEBRAZZİ RSS
-    private String RSS_URL = "http://webrazzi.com/feed/";
+
+    //private String RSS_URL = "http://webrazzi.com/feed/";
+   // private String RSS_URL ="https://etarim.net/feed";
+   // private String RSS_URL ="http://gidatarim.com/feed"
+   // private String RSS_URL ="http://www.gthbhaber.com/feed/";
+    //private String RSS_URL ="http://www.haberturk.com/rss";
+    //private String RSS_URL ="https://www.canlihaber.com/rss/";
+  //  private String RSS_URL ="http://www.dipnot.tv/feed/";
+   // private String RSS_URL ="http://www.kampushaber.com/rss.xml";
+    private String RSS_URL ="http://www.turkiyehaberajansi.com/rss.xml";
+
+
+
 
     // XML İ / RSS İ ÇEKTİRİP AYRIŞTIRACAĞIMIZ SINIFIMIZ
     private PullAndParseXML pullAndParseXML;
@@ -39,7 +50,7 @@ public class Haberler extends AppCompatActivity {
 
     // LISTEMİZ, RECYCLERVIEW
     private RecyclerView recyclerView;
-SharedPreferences preferences;
+    SharedPreferences preferences;
     SharedPreferences.Editor editor;
     // LISTE VE VERİ ARASINDAKİ BAĞLANTI - ADAPTER
     private PostAdapter adapter;
@@ -60,6 +71,8 @@ SharedPreferences preferences;
         mDrawer.addDrawerListener(toolbar);
         toolbar.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Haberler");
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
         username=(TextView)navigationView.getHeaderView(0).findViewById(R.id.username);
 

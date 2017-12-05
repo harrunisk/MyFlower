@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.harun.myflower.DetailsHaber">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/haber_baslik"
+            android:layout_width="wrap_content"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:textColor="@color/blue"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:padding="5dp"
+            android:id="@+id/haber_resim"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_height="@dimen/post_thumbnail_height"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/detaylar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/Sienna"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+</ScrollView>
