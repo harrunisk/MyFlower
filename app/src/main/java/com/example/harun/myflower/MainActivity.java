@@ -72,7 +72,7 @@ private ActionBarDrawerToggle toolbar;
         username=(TextView)navigationView.getHeaderView(0).findViewById(R.id.username);
 
         Bundle extra=getIntent().getExtras();
-        String username2=extra.getString("username");
+        final String username2=extra.getString("username");
         username.setText(username2);
 
         /*ImageView iv = (ImageView)navigationView.findViewById(R.id.nav_image);
@@ -102,6 +102,13 @@ private ActionBarDrawerToggle toolbar;
                             overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
                         }
+                    if(item.getItemId()==R.id.Anasayfa){
+                        Intent intent = new Intent(MainActivity.this, AnasayfaActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        intent.putExtra("username",username2);
+
+                        startActivity(intent);
+                    }
                     return false;
                 }
             });

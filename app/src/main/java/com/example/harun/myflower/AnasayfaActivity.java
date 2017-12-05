@@ -115,6 +115,13 @@ private ActionBarDrawerToggle toolbar;
 
                         startActivity(intent);
                     }
+                    if(item.getItemId()==R.id.add_tarla) {
+                        Intent intent = new Intent(AnasayfaActivity.this, Tarla.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
+                    }
 
                     return false;
                 }
