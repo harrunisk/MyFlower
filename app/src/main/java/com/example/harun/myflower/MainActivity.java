@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     MqttHelper mqttHelper;
     ChartHelper mChart;
     LineChart chart;
-    TextView username;
+TextView username;
 
     ListView lv;
     ArrayAdapter adapter;
@@ -49,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
     int k = 88;
     int id_Veri[];
     String tarih_Veri[];
-
-
     SharedPreferences preferences;//preferences referansı
     SharedPreferences.Editor editor;
 private DrawerLayout mDrawer;
@@ -74,7 +72,7 @@ private ActionBarDrawerToggle toolbar;
         username=(TextView)navigationView.getHeaderView(0).findViewById(R.id.username);
 
         Bundle extra=getIntent().getExtras();
-        final String username2=extra.getString("username");
+        String username2=extra.getString("username");
         username.setText(username2);
 
         /*ImageView iv = (ImageView)navigationView.findViewById(R.id.nav_image);
@@ -94,15 +92,16 @@ private ActionBarDrawerToggle toolbar;
                         Intent intent = new Intent(MainActivity.this, Haberler.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                         startActivity(intent);
-                    }
-                    if(item.getItemId()==R.id.Anasayfa){
-                        Intent intent = new Intent(MainActivity.this, AnasayfaActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        intent.putExtra("username",username2);
+                        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
-                        startActivity(intent);
                     }
+                        if(item.getItemId()==R.id.add_tarla) {
+                            Intent intent = new Intent(MainActivity.this, Tarla.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
+                        }
                     return false;
                 }
             });
@@ -159,6 +158,7 @@ private ActionBarDrawerToggle toolbar;
             }
         });
     }
+
     public void onResume(){
 
 super.onResume();
