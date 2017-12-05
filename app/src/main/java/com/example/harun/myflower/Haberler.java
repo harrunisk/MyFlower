@@ -76,7 +76,7 @@ public class Haberler extends AppCompatActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
         username=(TextView)navigationView.getHeaderView(0).findViewById(R.id.username);
 
-        String mail = preferences.getString("email", "");
+        final String mail = preferences.getString("email", "");
         username.setText(mail);
 
        /* Bundle extra=getIntent().getExtras();
@@ -93,6 +93,13 @@ public class Haberler extends AppCompatActivity {
                     intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intent);
                     finish();
+                }
+                if(item.getItemId()==R.id.Anasayfa){
+                    Intent intent = new Intent(Haberler.this, AnasayfaActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.putExtra("username",mail);
+
+                    startActivity(intent);
                 }
 
                 return false;

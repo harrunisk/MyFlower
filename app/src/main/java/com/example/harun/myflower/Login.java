@@ -107,7 +107,7 @@ public class Login extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         progressDialog.dismiss();
                         editor.putBoolean("login", true);
-                        Intent i =new Intent(Login.this, MainActivity.class);
+                        Intent i =new Intent(Login.this, AnasayfaActivity.class);
                         i.putExtra("username",inputEmail);
                         startActivity(i);
 

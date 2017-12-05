@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     MqttHelper mqttHelper;
     ChartHelper mChart;
     LineChart chart;
-TextView username;
+    TextView username;
 
     ListView lv;
     ArrayAdapter adapter;
@@ -49,6 +49,8 @@ TextView username;
     int k = 88;
     int id_Veri[];
     String tarih_Veri[];
+
+
     SharedPreferences preferences;//preferences referansı
     SharedPreferences.Editor editor;
 private DrawerLayout mDrawer;
@@ -72,7 +74,7 @@ private ActionBarDrawerToggle toolbar;
         username=(TextView)navigationView.getHeaderView(0).findViewById(R.id.username);
 
         Bundle extra=getIntent().getExtras();
-        String username2=extra.getString("username");
+        final String username2=extra.getString("username");
         username.setText(username2);
 
         /*ImageView iv = (ImageView)navigationView.findViewById(R.id.nav_image);
@@ -91,6 +93,13 @@ private ActionBarDrawerToggle toolbar;
                     if(item.getItemId()==R.id.haber){
                         Intent intent = new Intent(MainActivity.this, Haberler.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
+                    }
+                    if(item.getItemId()==R.id.Anasayfa){
+                        Intent intent = new Intent(MainActivity.this, AnasayfaActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        intent.putExtra("username",username2);
+
                         startActivity(intent);
                     }
 
@@ -150,7 +159,6 @@ private ActionBarDrawerToggle toolbar;
             }
         });
     }
-
     public void onResume(){
 
 super.onResume();
