@@ -178,6 +178,8 @@
     <color name="MediumBlue">#0000CD</color>
     <color name="DarkBlue">#00008B</color>
     <color name="Navy">#000080</color>
+    <color name="opak2">#00000000</color>
+    <color name="opak3">#80FFFFFF</color>
 
     <color name="asd">#7F004B</color>
 </resources>

@@ -82,14 +82,21 @@ public class Tarla extends AppCompatActivity {
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplication(), "Floating Action Button 1", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "TARLA EKLE ", Toast.LENGTH_SHORT).show();
+
+
+                Intent i =new Intent(Tarla.this,TarlaEkle.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
             }
         });
 
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplication(), "Floating Action Button 2", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplication(), "HASAT GEÇMİŞİ", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -101,7 +108,7 @@ public class Tarla extends AppCompatActivity {
 
                 if(item.getItemId()==R.id.haber){
                     Intent intent = new Intent(Tarla.this, Haberler.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
@@ -109,7 +116,7 @@ public class Tarla extends AppCompatActivity {
                 }
                 if(item.getItemId()==R.id.add_tarla) {
                     Intent intent = new Intent(Tarla.this, Tarla.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);

@@ -45,7 +45,9 @@
             android:theme="@style/AppTheme2" />
         <activity android:name=".Haberler" />
         <activity android:name=".DetailsHaber" />
-        <activity android:name=".Tarla"></activity>
+        <activity android:name=".Tarla" />
+
+        <activity android:name=".TarlaEkle" android:theme="@style/AppTheme2" ></activity>
     </application>
 
 </manifest>

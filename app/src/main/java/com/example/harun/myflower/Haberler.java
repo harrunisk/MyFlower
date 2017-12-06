@@ -87,17 +87,17 @@ public class Haberler extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
+                mDrawer.closeDrawers();
                 if(item.getItemId()==R.id.haber){
                     Intent intent = new Intent(Haberler.this, Haberler.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                 }
                 if(item.getItemId()==R.id.Anasayfa){
                     Intent intent = new Intent(Haberler.this, AnasayfaActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.putExtra("username",mail);
 
                     startActivity(intent);
@@ -105,7 +105,7 @@ public class Haberler extends AppCompatActivity {
 
                 if(item.getItemId()==R.id.add_tarla) {
                 Intent intent = new Intent(Haberler.this, Tarla.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
                 overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);

@@ -3,16 +3,17 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/DarkOrange</item>
-        <item name="colorPrimaryDark">@color/OrangeRed</item>
+        <item name="colorPrimary">@color/SteelBlue</item>
+        <item name="colorPrimaryDark">@color/SeaGreen</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="AppTheme2" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/red</item>
-        <item name="colorPrimaryDark">@android:color/holo_red_dark</item>
+        <item name="colorPrimaryDark">@color/OrangeRed</item>
     </style>
+
 
     <style name="My_AppTheme.Dark.Dialog" parent="Theme.AppCompat.Dialog">
         <item name="colorAccent">@color/white</item>
@@ -20,4 +21,13 @@
         <item name="android:background">@color/DarkRed</item>
     </style>
 
+    <style name="spinner_style" >
+        <item name="android:background">@drawable/spinnerstyle</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+    </style>
 </resources>

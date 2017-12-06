@@ -3,5 +3,9 @@
     <string name="kayit"><u>Kayit OL</u> </string>
     <string name="open">Ac</string>
     <string name="kapa"><u>Kapa</u> </string>
+    <string name="mahsul">Mahsül Seç </string>
+    <string name="su">Sulama Tipi </string>
+    <string name="toprak">Toprak Tipi</string>
+    <string name="urun">Ürün Çeşidi</string>
 
 </resources>

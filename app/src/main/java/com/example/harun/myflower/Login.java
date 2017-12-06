@@ -1,8 +1,10 @@
 package com.example.harun.myflower;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -45,7 +47,7 @@ public class Login extends AppCompatActivity {
 
         String mail = preferences.getString("email", "");
         username.setText(mail);
-        String sifre=preferences.getString("sifre","");
+        String sifre = preferences.getString("sifre", "");
         pasword.setText(sifre);
 
 
@@ -93,7 +95,7 @@ public class Login extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Şifrenizi Girin", Toast.LENGTH_SHORT).show();
         } else if (inputPassword.length() < 6) {
             Toast.makeText(getApplicationContext(), "Şifreniz 6 karakter olmali!", Toast.LENGTH_SHORT).show();
-        } else {
+        } else if(InternetKontrol()) {
 
             final ProgressDialog progressDialog = new ProgressDialog(Login.this,
                     R.style.My_AppTheme_Dark_Dialog);
@@ -107,8 +109,8 @@ public class Login extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         progressDialog.dismiss();
                         editor.putBoolean("login", true);
-                        Intent i =new Intent(Login.this, AnasayfaActivity.class);
-                        i.putExtra("username",inputEmail);
+                        Intent i = new Intent(Login.this, AnasayfaActivity.class);
+                        i.putExtra("username", inputEmail);
                         startActivity(i);
 
                         editor.putString("email", inputEmail);//email değeri
@@ -125,8 +127,19 @@ public class Login extends AppCompatActivity {
             });
 
         }
+        else Toast.makeText(getApplicationContext(),"INTERNET BAĞLI DEĞİL ",Toast.LENGTH_LONG).show();
 
 
     }
+
+    public boolean InternetKontrol() {
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (manager.getActiveNetworkInfo() != null && manager.getActiveNetworkInfo().isAvailable() && manager.getActiveNetworkInfo().isConnected()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
+
 

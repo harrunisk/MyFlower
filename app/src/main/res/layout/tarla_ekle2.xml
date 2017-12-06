@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+
+        android:id="@+id/toolbar_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/DarkOrange"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:ems="10"
+                    android:id="@+id/tarla_name"
+                    android:hint="Tarla Adı"
+                    android:inputType="textPersonName"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                   />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Tarla Büyüklüğü Dekar"
+                    android:inputType="textPersonName"
+                    android:id="@+id/tarla_buyuk"
+                    android:textAlignment="center"
+                    android:textAllCaps="true" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Verim Beklentisi (Kg/Dekar)"
+                    android:inputType="textPersonName"
+                    android:textAlignment="center"
+                    android:id="@+id/verim"
+                    android:textAllCaps="true" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <Spinner
+                    style="@style/spinner_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:popupBackground="@color/WhiteSmoke"
+                    android:prompt="@string/mahsul"
+                    android:scrollbars="horizontal"
+                    android:id="@+id/mahsul_spinner"
+                    android:spinnerMode="dropdown">
+
+                </Spinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <Spinner
+                    style="@style/spinner_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:paddingEnd="10dp"
+                    android:popupBackground="@color/WhiteSmoke"
+                    android:prompt="@string/urun"
+                    android:id="@+id/urun_spinner"
+                    android:scrollbars="horizontal"
+                    android:spinnerMode="dropdown">
+
+                </Spinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <Spinner
+                    style="@style/spinner_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:paddingEnd="10dp"
+                    android:id="@+id/toprak_tipi"
+                    android:popupBackground="@color/WhiteSmoke"
+                    android:prompt="@string/toprak"
+                    android:scrollbars="horizontal"
+                    android:spinnerMode="dropdown">
+
+                </Spinner>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <Spinner
+                    style="@style/spinner_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:paddingEnd="10dp"
+                    android:id="@+id/sulama_tipi"
+                    android:popupBackground="@color/WhiteSmoke"
+                    android:prompt="@string/su"
+                    android:scrollbars="horizontal"
+                    android:spinnerMode="dropdown">
+
+                </Spinner>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <Button
+
+                    android:id="@+id/map_ekle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@drawable/textview_back"
+                    android:drawableRight="@drawable/mapview"
+                    android:paddingBottom="2dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="5dp"
+
+                    android:text="TARLA NEREDE "
+                    android:textAlignment="center"
+                    android:textColor="@color/OrangeRed"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/textview_back"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:weightSum="1">
+
+                <Button
+
+                    android:id="@+id/ekim_tarih"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0.5"
+                    android:background="@android:color/transparent"
+                    android:drawableRight="@drawable/tarih"
+                    android:hint="Hasat Tarihi"
+                    android:textColor="@color/OrangeRed"
+                    android:textColorHint="@color/OrangeRed"
+                    android:textSize="15sp">
+
+                </Button>
+
+                <Button
+
+                    android:id="@+id/hasat_tarih"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0.50"
+                    android:background="@android:color/transparent"
+                    android:drawableRight="@drawable/tarih"
+                    android:hint="Ekim Tarihi"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/OrangeRed"
+                    android:textColorHint="@color/OrangeRed"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:paddingBottom="5dp">
+
+                <Button
+
+                    android:id="@+id/sensor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent"
+                    android:drawableRight="@drawable/sensor"
+                    android:hint="SENSÖR EKLE "
+                    android:padding="10dp"
+                    android:textColor="@color/OrangeRed"
+                    android:textColorHint="@color/OrangeRed"
+                    android:textSize="15dp">
+
+                </Button>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    </LinearLayout>
+
+

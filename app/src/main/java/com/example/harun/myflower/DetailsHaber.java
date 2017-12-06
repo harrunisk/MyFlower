@@ -3,6 +3,7 @@ package com.example.harun.myflower;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,10 +18,13 @@ public class DetailsHaber extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_haber);
 
+
         detaylar=(TextView)findViewById(R.id.detaylar);
         baslik=(TextView)findViewById(R.id.haber_baslik);
         resim=(ImageView)findViewById(R.id.haber_resim);
+
         getSupportActionBar().setTitle("Haber Detayları");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle extra=getIntent().getExtras();
         String yazı=extra.getString("detaylar");
@@ -34,5 +38,14 @@ public class DetailsHaber extends AppCompatActivity {
 
 
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

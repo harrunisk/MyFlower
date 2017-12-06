@@ -68,7 +68,7 @@ private ActionBarDrawerToggle toolbar;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         startMqtt();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
         username=(TextView)navigationView.getHeaderView(0).findViewById(R.id.username);
 
         Bundle extra=getIntent().getExtras();
@@ -88,6 +88,7 @@ private ActionBarDrawerToggle toolbar;
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+                 toolbar.onDrawerOpened(mDrawer);
                     if(item.getItemId()==R.id.haber){
                         Intent intent = new Intent(MainActivity.this, Haberler.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
