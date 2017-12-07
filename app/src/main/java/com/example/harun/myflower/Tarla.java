@@ -14,9 +14,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Tarla extends AppCompatActivity {
     TextView username;
@@ -33,10 +39,37 @@ public class Tarla extends AppCompatActivity {
     Animation hide_fab_1;
     Animation show_fab_2;
     Animation hide_fab_2;
+
+
+    //listview
+    ListView lv;
+    ArrayAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tarla);
+        //listview
+
+        final List<String> tarlaListe = new ArrayList<String>();
+        tarlaListe.add("Mahsül Seçimi");
+        tarlaListe.add("elma");
+        tarlaListe.add("armut");
+        tarlaListe.add("zeytin");
+
+        lv=(ListView)findViewById(R.id.listViewTarla);
+        adapter = new ArrayAdapter(this, R.layout.list_item_tarla,R.id.list_item_text_tarla,tarlaListe );
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent=new Intent(getApplicationContext(),TarlaBilgi1.class);
+                //intent.putExtra("id",(int)id_Veri[position]);
+                startActivity(intent);
+            }
+        });
+
+
        // rootLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         mDrawer=(DrawerLayout)findViewById(R.id.drawer);
         toolbar=new ActionBarDrawerToggle(this,mDrawer,R.string.open,R.string.kapa);

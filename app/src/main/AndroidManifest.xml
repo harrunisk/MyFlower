@@ -32,6 +32,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".AnasayfaActivity"/>
+        <activity android:name=".TarlaBilgi1"/>
 
         <activity android:name=".MainActivity">
 

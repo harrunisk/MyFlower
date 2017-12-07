@@ -9,6 +9,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -45,7 +46,7 @@ import java.util.List;
 public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSelectedListener, LocationSource.OnLocationChangedListener {
     EditText tarla_name, tarla_buyuklugu, verim;
     Spinner mahsul, urun, toprak_tipi, sulama_tipi;
-    Button map, hasat_tarih, ekim_tarih, sensor;
+    Button map, hasat_tarih, ekim_tarih, sensor,tarlaEkle;
     GoogleMap googleMap;
     MapView mMapView;
     Location mLastLocation;
@@ -57,6 +58,10 @@ public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSe
     Button iptal, yesBtn, noBtn;
     MapFragment f;
 
+    //database'e göndereceğim değişikenler
+    String tarlaAdi,tarlaUrun,tarlaUrunCesid,tarlaToprak,tarlaSulama,tarlaYer,tarlaHasatTarih,tarlaEkimTarih;
+    Integer tarlaBuyukluk, tarlaVerim;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +71,7 @@ public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSe
         toolbar.setTitle("Tarla Ekle");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
 
         tarla_name = (EditText) findViewById(R.id.tarla_name);
@@ -79,10 +85,33 @@ public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSe
         hasat_tarih = (Button) findViewById(R.id.hasat_tarih);
         ekim_tarih = (Button) findViewById(R.id.ekim_tarih);
         sensor = (Button) findViewById(R.id.sensor);
+        tarlaEkle=(Button) findViewById(R.id.tarlaEkle);
+        tarlaEkle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if ((tarla_name.getText()==null) || (tarla_buyuklugu.getText()==null)  ||(verim.getText() ==null)||(tarlaUrun==null) || (tarlaUrunCesid==null)
+                        ||(tarlaSulama==null)||(tarlaToprak==null)||(tarlaYer==null) ||(tarlaEkimTarih==null) ||(tarlaHasatTarih==null))
+                {
+                    Toast.makeText(getApplicationContext(),"Tüm alanları doldurunuz!",Toast.LENGTH_LONG).show();
+
+                }
+                else{
+
+                    Database db=new Database(getApplicationContext());
+                    tarlaAdi=tarla_name.getText().toString();
+                    tarlaBuyukluk=Integer.parseInt(tarla_buyuklugu.getText().toString());
+                    tarlaVerim=Integer.parseInt(verim.getText().toString());
+                    db.tarlaEkle(tarlaAdi,tarlaBuyukluk,tarlaVerim,tarlaUrun,tarlaUrunCesid,tarlaToprak,tarlaSulama,tarlaYer,tarlaHasatTarih,tarlaEkimTarih);
+
+
+
+                }
+            }
+        });
 
 
         ///*******SPİNNER İŞLEMLERİ*****///////
-        mahsul.setOnItemSelectedListener(this);
+
         final List<String> mahsulListe = new ArrayList<String>();
         mahsulListe.add("Mahsül Seçimi");
         mahsulListe.add("elma");
@@ -92,9 +121,24 @@ public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSe
 
         final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, mahsulListe);
         mahsul.setAdapter(dataAdapter);
+        mahsul.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                tarlaUrun=parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
         ///**************************************//////
 
-        urun.setOnItemSelectedListener(this);
+
         final List<String> urunListe = new ArrayList<String>();
         urunListe.add("Ürün Çeşidi");
         urunListe.add("Arbosona");
@@ -103,9 +147,23 @@ public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSe
 
         final ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, urunListe);
         urun.setAdapter(dataAdapter2);
+        urun.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                tarlaUrunCesid=parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
-        sulama_tipi.setOnItemSelectedListener(this);
+
+
+
+
         final List<String> sulamaListe = new ArrayList<String>();
         sulamaListe.add("Sulama Tipi");
         sulamaListe.add("Tip1");
@@ -114,9 +172,20 @@ public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSe
 
         final ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, sulamaListe);
         sulama_tipi.setAdapter(dataAdapter3);
+        sulama_tipi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                tarlaSulama=parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
-        toprak_tipi.setOnItemSelectedListener(this);
+
         final List<String> toprakListe = new ArrayList<String>();
         toprakListe.add("Toprak Tipi");
         toprakListe.add("Tip1");
@@ -125,6 +194,17 @@ public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSe
 
         final ArrayAdapter<String> dataAdapter4 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, toprakListe);
         toprak_tipi.setAdapter(dataAdapter4);
+        toprak_tipi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                tarlaToprak=parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         map.setOnClickListener(new View.OnClickListener() {
@@ -250,6 +330,8 @@ public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSe
                 public void onClick(View view) {
                     dialog2.dismiss();
                     map.setText(latLng2.toString());
+                    tarlaYer=latLng2.toString();
+
                     getFragmentManager().beginTransaction().remove(f).commit();
 
                 }

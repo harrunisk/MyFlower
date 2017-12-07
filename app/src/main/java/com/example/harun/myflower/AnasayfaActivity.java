@@ -21,7 +21,7 @@ public class AnasayfaActivity extends AppCompatActivity {
   Button tarla,fiyat,urun,haber,ayarlar;
 
 
-    SharedPreferences preferences;//preferences referansı
+    SharedPreferences preferences;//preferences referan
     SharedPreferences.Editor editor;
 private DrawerLayout mDrawer;
 private ActionBarDrawerToggle toolbar;

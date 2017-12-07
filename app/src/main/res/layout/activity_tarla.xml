@@ -36,6 +36,14 @@
 
         <include layout="@layout/fab_layout" />
 
+        <ListView
+            android:id="@+id/listViewTarla"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/fab"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="18dp" />
+
     </RelativeLayout>
 
 
