@@ -5,12 +5,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -18,113 +19,143 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.harun.myflower.CardFragment.CardItem;
+import com.example.harun.myflower.CardFragment.CardPagerAdapter;
+import com.example.harun.myflower.CardFragment.ShadowTransformer;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.LocationSource;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-
-public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSelectedListener, LocationSource.OnLocationChangedListener {
+public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, LocationSource.OnLocationChangedListener {
     EditText tarla_name, tarla_buyuklugu, verim;
     Spinner mahsul, urun, toprak_tipi, sulama_tipi;
     Button map, hasat_tarih, ekim_tarih, sensor;
     GoogleMap googleMap;
-    MapView mMapView;
-    Location mLastLocation;
-    Marker mCurrLocationMarker;
-    LocationManager locationManager;
-    double lat;
-    double lng;
     LatLng latLng2;
     Button iptal, yesBtn, noBtn;
-    MapFragment f;
+    SupportMapFragment f;
+    String ekimZamani, hasatZamani;
+    private ViewPager mViewPager;
+    CardItem card;
+    public String secilen_item;
+    private CardPagerAdapter mCardAdapter;
+    private ShadowTransformer mCardShadowTransformer;
 
+    // private CardFragmentPagerAdapter mFragmentCardAdapter;
+    // private ShadowTransformer mFragmentCardShadowTransformer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tarla_ekle2);
+        setContentView(R.layout.tarla_ekle3);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         //  toolbar.setLogo();
         toolbar.setTitle("Tarla Ekle");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        final ArrayList<String> urunListe = new ArrayList<String>();
 
-        tarla_name = (EditText) findViewById(R.id.tarla_name);
-        tarla_buyuklugu = (EditText) findViewById(R.id.tarla_buyuk);
-        verim = (EditText) findViewById(R.id.verim);
-        mahsul = (Spinner) findViewById(R.id.mahsul_spinner);
-        urun = (Spinner) findViewById(R.id.urun_spinner);
-        toprak_tipi = (Spinner) findViewById(R.id.toprak_tipi);
-        sulama_tipi = (Spinner) findViewById(R.id.sulama_tipi);
-        map = (Button) findViewById(R.id.map_ekle);
-        hasat_tarih = (Button) findViewById(R.id.hasat_tarih);
-        ekim_tarih = (Button) findViewById(R.id.ekim_tarih);
-        sensor = (Button) findViewById(R.id.sensor);
-
-
-        ///*******SPİNNER İŞLEMLERİ*****///////
-        mahsul.setOnItemSelectedListener(this);
-        final List<String> mahsulListe = new ArrayList<String>();
-        mahsulListe.add("Mahsül Seçimi");
-        mahsulListe.add("elma");
-        mahsulListe.add("armut");
-        mahsulListe.add("zeytin");
-
-
-        final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, mahsulListe);
-        mahsul.setAdapter(dataAdapter);
-        ///**************************************//////
-
-        urun.setOnItemSelectedListener(this);
-        final List<String> urunListe = new ArrayList<String>();
         urunListe.add("Ürün Çeşidi");
         urunListe.add("Arbosona");
         urunListe.add("Çeşit1");
         urunListe.add("Çeşit2");
 
-        final ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, urunListe);
-        urun.setAdapter(dataAdapter2);
+        final ArrayList<String> mahsulListe = new ArrayList<String>();
+        mahsulListe.add("Mahsül Seçimi");
+        mahsulListe.add("elma");
+        mahsulListe.add("armut");
+        mahsulListe.add("zeytin");
 
+        mViewPager = (ViewPager) findViewById(R.id.viewPager);
+        mCardAdapter = new CardPagerAdapter(this);
+        mCardAdapter.addCardItem(new CardItem(R.string.title_1, mahsulListe)); // HACI BAK LİSTEYİ BURDAN GÖNDERECEN VERİ TABANINDA CEK BURAYA KOY
+        mCardAdapter.addCardItem(new CardItem(R.string.title_2, urunListe));
+        mCardAdapter.addCardItem(new CardItem(R.string.title_3, urunListe));
+        mCardAdapter.addCardItem(new CardItem(R.string.title_4, urunListe));
+        mCardShadowTransformer = new ShadowTransformer(mViewPager, mCardAdapter);
+        mViewPager.setAdapter(mCardAdapter);
+        mViewPager.setPageTransformer(false, mCardShadowTransformer);
+        mViewPager.setOffscreenPageLimit(3);
+        mCardShadowTransformer.enableScaling(true);
 
-        sulama_tipi.setOnItemSelectedListener(this);
-        final List<String> sulamaListe = new ArrayList<String>();
-        sulamaListe.add("Sulama Tipi");
-        sulamaListe.add("Tip1");
-        sulamaListe.add("Tip2");
-        sulamaListe.add("Tip3");
-
-        final ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, sulamaListe);
-        sulama_tipi.setAdapter(dataAdapter3);
-
-
-        toprak_tipi.setOnItemSelectedListener(this);
-        final List<String> toprakListe = new ArrayList<String>();
-        toprakListe.add("Toprak Tipi");
-        toprakListe.add("Tip1");
-        toprakListe.add("Tip2");
-        toprakListe.add("Tip3");
-
-        final ArrayAdapter<String> dataAdapter4 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, toprakListe);
-        toprak_tipi.setAdapter(dataAdapter4);
+        tarla_name = (EditText) findViewById(R.id.tarla_name);
+        tarla_buyuklugu = (EditText) findViewById(R.id.tarla_buyuk);
+        verim = (EditText) findViewById(R.id.verim);
+        //mahsul = (Spinner) findViewById(R.id.mahsul_spinner);
+        // urun = (Spinner) findViewById(R.id.urun_spinner);
+        // toprak_tipi = (Spinner) findViewById(R.id.toprak_tipi);
+        // sulama_tipi = (Spinner) findViewById(R.id.sulama_tipi);
+        map = (Button) findViewById(R.id.map_ekle);
+        hasat_tarih = (Button) findViewById(R.id.hasat_tarih);
+        ekim_tarih = (Button) findViewById(R.id.ekim_tarih);
+        sensor = (Button) findViewById(R.id.sensor);
+/*/*/
+//
+//        ///*******SPİNNER İŞLEMLERİ*****///////
+//
+//        mahsul.setOnItemSelectedListener(this);
+//        final List<String> mahsulListe = new ArrayList<String>();
+//        mahsulListe.add("Mahsül Seçimi");
+//        mahsulListe.add("elma");
+//        mahsulListe.add("armut");
+//        mahsulListe.add("zeytin");
+//
+//
+//        final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, mahsulListe);
+//        mahsul.setAdapter(dataAdapter);
+//        ///**************************************//////
+//
+//        urun.setOnItemSelectedListener(this);
+//        final List<String> urunListe = new ArrayList<String>();
+//        urunListe.add("Ürün Çeşidi");
+//        urunListe.add("Arbosona");
+//        urunListe.add("Çeşit1");
+//        urunListe.add("Çeşit2");
+//
+//        final ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, urunListe);
+//        urun.setAdapter(dataAdapter2);
+//
+//
+//        sulama_tipi.setOnItemSelectedListener(this);
+//        final List<String> sulamaListe = new ArrayList<String>();
+//        sulamaListe.add("Sulama Tipi");
+//        sulamaListe.add("Tip1");
+//        sulamaListe.add("Tip2");
+//        sulamaListe.add("Tip3");
+//
+//        final ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, sulamaListe);
+//        sulama_tipi.setAdapter(dataAdapter3);
+//
+//
+//        toprak_tipi.setOnItemSelectedListener(this);
+//        final List<String> toprakListe = new ArrayList<String>();
+//        toprakListe.add("Toprak Tipi");
+//        toprakListe.add("Tip1");
+//        toprakListe.add("Tip2");
+//        toprakListe.add("Tip3");
+//
+//        final ArrayAdapter<String> dataAdapter4 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, toprakListe);
+//        toprak_tipi.setAdapter(dataAdapter4);
+//
+//
+//
+//
 
 
         map.setOnClickListener(new View.OnClickListener() {
@@ -147,8 +178,72 @@ public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSe
             }
         });
 
+        ekim_tarih.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Calendar now = Calendar.getInstance();
+                final DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(TarlaEkle.this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                );
+
+                datePickerDialog.setMinDate(Calendar.getInstance());
+                datePickerDialog.setAccentColor(Color.parseColor("#FF8C00"));
+                datePickerDialog.setThemeDark(false); //set dark them for dialog?
+                datePickerDialog.vibrate(true); //vibrate on choosing date?
+                datePickerDialog.dismissOnPause(true); //dismiss dialog when onPause() called?
+                datePickerDialog.showYearPickerFirst(false); //choose year first?
+                //  datePickerDialog.setAccentColor(Color.parseColor("#9C27A0")); // custom accent color
+                datePickerDialog.setTitle("Ekim Tarihi Seç"); //dialog title
+                datePickerDialog.show(getFragmentManager(), "Ekim Tarihi "); //show dialog
+                datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                        ekimZamani = dayOfMonth + "/" + (++monthOfYear) + "/" + year;
+
+                        ekim_tarih.setText("Ekim Tarihi: " + ekimZamani);
+                    }
+                });
+
+            }
+        });
+        hasat_tarih.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Calendar now = Calendar.getInstance();
+                final DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(TarlaEkle.this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                );
+
+                datePickerDialog.setMinDate(Calendar.getInstance());
+                datePickerDialog.setAccentColor(Color.parseColor("#FF8C00"));
+                datePickerDialog.setThemeDark(false); //set dark them for dialog?
+                datePickerDialog.vibrate(true); //vibrate on choosing date?
+                datePickerDialog.dismissOnPause(true); //dismiss dialog when onPause() called?
+                datePickerDialog.showYearPickerFirst(false); //choose year first?
+                //  datePickerDialog.setAccentColor(Color.parseColor("#9C27A0")); // custom accent color
+                datePickerDialog.setTitle("Hasat Tarihi Seç"); //dialog title
+                datePickerDialog.show(getFragmentManager(), "Hasat Tarihi "); //show dialog
+                datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                        hasatZamani = dayOfMonth + "/" + (++monthOfYear) + "/" + year;
+
+                        hasat_tarih.setText("Hasat Tarihi:" + hasatZamani);
+                    }
+                });
+
+
+            }
+        });
 
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -160,15 +255,6 @@ public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSe
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
 
     public void createMapView(final Activity context) {
 
@@ -181,11 +267,12 @@ public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSe
         iptal = (Button) dialog2.findViewById(R.id.btn_cancel);
         dialog2.show();
 
+
         //addMarker();
         try {
             if (null == googleMap) {
 
-                f = (MapFragment) getFragmentManager().findFragmentById(R.id.mapView);
+                f = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapView);
 
                 googleMap = f.getMap();
                 googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -211,8 +298,8 @@ public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSe
                     @Override
                     public void onMapClick(final LatLng latLng) {
 
-                        latLng2=latLng;
-                        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(dialog2.getContext(),android.R.style.Theme_DeviceDefault_Dialog_Alert);
+                        latLng2 = latLng;
+                        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(dialog2.getContext(), android.R.style.Theme_DeviceDefault_Dialog_Alert);
                         LayoutInflater inflater = context.getLayoutInflater();
                         View dialogView = inflater.inflate(R.layout.alert_dialog, null);
                         dialogBuilder.setView(dialogView);
@@ -220,6 +307,9 @@ public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSe
                         alert_dialog.show();
                         yesBtn = (Button) dialogView.findViewById(R.id.btn_yes);
                         noBtn = (Button) dialogView.findViewById(R.id.btn_no);
+
+
+                        //***ALERT DİALOG YES NO ***///
                         yesBtn.setOnClickListener(new View.OnClickListener() {
 
 
@@ -230,6 +320,7 @@ public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSe
                                 Toast.makeText(getApplicationContext(),
                                         "KOORDİANATLAR ::" + latLng, Toast.LENGTH_LONG).show();
                                 alert_dialog.dismiss();
+                                map.setClickable(false);
 
                             }
                         });
@@ -240,6 +331,8 @@ public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSe
                             }
                         });
 
+                        //*****ALER DİALOG İSİ BİTTİ **////
+
                     }
                 });
 
@@ -248,24 +341,17 @@ public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSe
             iptal.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    dialog2.dismiss();
-                    map.setText(latLng2.toString());
-                    getFragmentManager().beginTransaction().remove(f).commit();
+                    if (!map.isClickable()) {
+                        dialog2.dismiss();
+                        map.setText(latLng2.toString());
+                        //getFragmentManager().beginTransaction().remove(f).commit();
+                        f.onStop();
+                    } else
+                        Toast.makeText(getApplicationContext(), "LÜTFEN BİR YER İŞARETLEYİNİZ", Toast.LENGTH_SHORT).show();
+
 
                 }
             });
-
-
-
-
-
-                /* googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom   // animasyon ile yakınlaşma
-                        (new LatLng(lat, lng), 15f));*/
-              /*  googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(lat, lng))
-                        .title("Marker")
-                        .draggable(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.mapmarker)));
-*/
 
             if (null == googleMap) {
                 Toast.makeText(getApplicationContext(),
@@ -282,25 +368,10 @@ public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSe
 
     }
 
-   /* @Override
-    public void onMapReady(GoogleMap googleMap) {
-        googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-        googleMap.setMyLocationEnabled(true);
-        googleMap.setTrafficEnabled(true);
-        googleMap.setIndoorEnabled(true);
-        googleMap.setBuildingsEnabled(true);
-        googleMap.getUiSettings().setZoomControlsEnabled(true);
-    }*/
+    public static float dpToPixels(int dp, Context context) {
+        return dp * (context.getResources().getDisplayMetrics().density);
+    }
 
-   /* private void addMarker(){
-        if(null != googleMap){
-            googleMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(0, 0))
-                    .title("Marker")
-                    .draggable(true).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker))
-            );
-        }
-    }*/
 
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
@@ -351,12 +422,12 @@ public class TarlaEkle extends AppCompatActivity implements AdapterView.OnItemSe
     @Override
     public void onLocationChanged(Location location) {
 
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        //LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
-       /* MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("aaaa");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));*/
     }
 
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+
+    }
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <LinearLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
 
@@ -44,7 +44,7 @@
                     android:inputType="textPersonName"
                     android:textAlignment="center"
                     android:textAllCaps="true"
-                   />
+                    />
 
             </LinearLayout>
 
@@ -89,98 +89,23 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:orientation="horizontal"
-                android:padding="5dp">
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content">
 
-                <Spinner
-                    style="@style/spinner_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:popupBackground="@color/WhiteSmoke"
-                    android:prompt="@string/mahsul"
-                    android:scrollbars="horizontal"
-                    android:id="@+id/mahsul_spinner"
-                    android:spinnerMode="dropdown">
-
-                </Spinner>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:orientation="horizontal"
-                android:padding="5dp">
-
-                <Spinner
-                    style="@style/spinner_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:paddingEnd="10dp"
-                    android:popupBackground="@color/WhiteSmoke"
-                    android:prompt="@string/urun"
-                    android:id="@+id/urun_spinner"
-                    android:scrollbars="horizontal"
-                    android:spinnerMode="dropdown">
-
-                </Spinner>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:orientation="horizontal"
-                android:padding="5dp">
-
-                <Spinner
-                    style="@style/spinner_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:paddingEnd="10dp"
-                    android:id="@+id/toprak_tipi"
-                    android:popupBackground="@color/WhiteSmoke"
-                    android:prompt="@string/toprak"
-                    android:scrollbars="horizontal"
-                    android:spinnerMode="dropdown">
-
-                </Spinner>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:orientation="horizontal"
-                android:padding="5dp">
-
-                <Spinner
-                    style="@style/spinner_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:gravity="center"
-                    android:paddingEnd="10dp"
-                    android:id="@+id/sulama_tipi"
-                    android:popupBackground="@color/WhiteSmoke"
-                    android:prompt="@string/su"
-                    android:scrollbars="horizontal"
-                    android:spinnerMode="dropdown">
-
-                </Spinner>
-
-
-            </LinearLayout>
+           <android.support.v4.view.ViewPager
+               android:id="@+id/viewPager"
+               android:layout_width="match_parent"
+               android:layout_height="300dp"
+               android:layout_gravity="bottom"
+               android:clipToPadding="false"
+               android:overScrollMode="never"
+               android:paddingBottom="10dp"
+               android:paddingEnd="40dp"
+               android:paddingLeft="20dp"
+               android:paddingRight="45dp"
+               android:paddingStart="40dp" />
+       </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -285,6 +210,6 @@
         </LinearLayout>
     </ScrollView>
 
-    </LinearLayout>
+</LinearLayout>
 
 
