@@ -51,14 +51,16 @@ public class Tarla extends AppCompatActivity {
         setContentView(R.layout.activity_tarla);
         //listview
 
-        final List<String> tarlaListe = new ArrayList<String>();
-        tarlaListe.add("Mahsül Seçimi");
-        tarlaListe.add("elma");
-        tarlaListe.add("armut");
-        tarlaListe.add("zeytin");
+        final ArrayList<String> urunListe = new ArrayList<String>();
+
+        urunListe.add("Ürün");
+        urunListe.add("Arbosona");
+        urunListe.add("Çeşit1");
+        urunListe.add("Çeşit2");
+
 
         lv=(ListView)findViewById(R.id.listViewTarla);
-        adapter = new ArrayAdapter(this, R.layout.list_item_tarla,R.id.list_item_text_tarla,tarlaListe );
+        adapter = new ArrayAdapter(this, R.layout.list_item_tarla,R.id.list_item_text_tarla,urunListe );
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

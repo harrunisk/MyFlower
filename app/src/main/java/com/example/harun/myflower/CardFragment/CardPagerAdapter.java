@@ -1,6 +1,10 @@
 package com.example.harun.myflower.CardFragment;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -10,20 +14,33 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.harun.myflower.R;
+import com.example.harun.myflower.TarlaEkle;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.app.PendingIntent.getActivity;
+
 public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
+
+
+
+
 
     private List<CardView> mViews;
     private ArrayList<CardItem> mData;
     private float mBaseElevation;
     Activity activity;
     public String secilen_item;
-  //  public TextView contentTextView;
+    public String toprakTipi;
+    public String sulamaTipi;
+    public String urun;
+    public String urunCesidi;
+
+    //  public TextView contentTextView;
 
     public CardPagerAdapter(Activity activity) {
         mData = new ArrayList<>();
@@ -73,6 +90,7 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
         return view;
     }
 
+
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((View) object);
@@ -86,6 +104,9 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
         titleTextView.setText(item.getTitle());
         final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(activity, android.R.layout.simple_spinner_dropdown_item, item.getSpinnerListe());
         spinner.setAdapter(dataAdapter);
+
+
+
         //contentTextView.setPaintFlags(contentTextView.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
 
         //contentTextView.setText(item.getText());
@@ -93,9 +114,34 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 if(position>0) {
+                    String type=dataAdapter.getItem(0);
+                    if (type=="Ürün"){
+                        secilen_item=adapterView.getItemAtPosition(position).toString();
+                        //buradaki veriyi tarla ekleye göndermek lazım
+                        contentTextView.setText(secilen_item);
+                        urun=secilen_item.toString();
+                    }
+                    else if (type=="Ürün Çeşidi"){
+                        secilen_item=adapterView.getItemAtPosition(position).toString();
+                        //buradaki veriyi tarla ekleye göndermek lazım
+                        contentTextView.setText(secilen_item);
+                        urunCesidi=secilen_item.toString();
+                    }
+                        else if (type=="Sulama Tipi"){
+                        secilen_item=adapterView.getItemAtPosition(position).toString();
+                        //buradaki veriyi tarla ekleye göndermek lazım
+                        contentTextView.setText(secilen_item);
+                        sulamaTipi=secilen_item.toString();
+                    }
+                    else if (type=="Toprak Tipi"){
+                        secilen_item=adapterView.getItemAtPosition(position).toString();
+                        //buradaki veriyi tarla ekleye göndermek lazım
+                        contentTextView.setText(secilen_item);
+                        toprakTipi=secilen_item.toString();
+                    }
 
-                    secilen_item=adapterView.getItemAtPosition(position).toString();
-                    contentTextView.setText(secilen_item);
+
+
                 }
 
             }
@@ -109,6 +155,7 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
 
 
 /*
+
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 

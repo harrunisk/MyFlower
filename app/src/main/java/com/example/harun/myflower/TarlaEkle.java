@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -26,6 +27,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.harun.myflower.CardFragment.CardAdapter;
 import com.example.harun.myflower.CardFragment.CardItem;
 import com.example.harun.myflower.CardFragment.CardPagerAdapter;
 import com.example.harun.myflower.CardFragment.ShadowTransformer;
@@ -62,6 +64,9 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
     String tarlaAdi,tarlaUrun,tarlaUrunCesid,tarlaToprak,tarlaSulama,tarlaYer,tarlaHasatTarih,tarlaEkimTarih;
     Integer tarlaBuyukluk, tarlaVerim;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,28 +79,39 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
 
         final ArrayList<String> urunListe = new ArrayList<String>();
 
-        urunListe.add("Ürün Çeşidi");
+        urunListe.add("Ürün");
         urunListe.add("Arbosona");
         urunListe.add("Çeşit1");
         urunListe.add("Çeşit2");
 
         final ArrayList<String> mahsulListe = new ArrayList<String>();
-        mahsulListe.add("Mahsül Seçimi");
+        mahsulListe.add("Ürün Çeşidi");
         mahsulListe.add("elma");
         mahsulListe.add("armut");
         mahsulListe.add("zeytin");
+        final ArrayList<String> toprakListe = new ArrayList<String>();
+        toprakListe.add("Toprak Tipi");
+        toprakListe.add("elma");
+        toprakListe.add("armut");
+        toprakListe.add("zeytin");
+        final ArrayList<String> sulamaListe = new ArrayList<String>();
+        sulamaListe.add("Sulama Tipi");
+        sulamaListe.add("elma");
+        sulamaListe.add("armut");
+        sulamaListe.add("zeytin");
 
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
         mCardAdapter = new CardPagerAdapter(this);
-        mCardAdapter.addCardItem(new CardItem(R.string.title_1, mahsulListe)); // HACI BAK LİSTEYİ BURDAN GÖNDERECEN VERİ TABANINDA CEK BURAYA KOY
-        mCardAdapter.addCardItem(new CardItem(R.string.title_2, urunListe));
-        mCardAdapter.addCardItem(new CardItem(R.string.title_3, urunListe));
-        mCardAdapter.addCardItem(new CardItem(R.string.title_4, urunListe));
+        mCardAdapter.addCardItem(new CardItem(R.string.title_1, urunListe)); // HACI BAK LİSTEYİ BURDAN GÖNDERECEN VERİ TABANINDA CEK BURAYA KOY
+        mCardAdapter.addCardItem(new CardItem(R.string.title_2, mahsulListe));
+        mCardAdapter.addCardItem(new CardItem(R.string.title_3, toprakListe));
+        mCardAdapter.addCardItem(new CardItem(R.string.title_4, sulamaListe));
         mCardShadowTransformer = new ShadowTransformer(mViewPager, mCardAdapter);
         mViewPager.setAdapter(mCardAdapter);
         mViewPager.setPageTransformer(false, mCardShadowTransformer);
         mViewPager.setOffscreenPageLimit(3);
         mCardShadowTransformer.enableScaling(true);
+
 
 
         tarla_name = (EditText) findViewById(R.id.tarla_name);
@@ -109,6 +125,53 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
         hasat_tarih = (Button) findViewById(R.id.hasat_tarih);
         ekim_tarih = (Button) findViewById(R.id.ekim_tarih);
         sensor = (Button) findViewById(R.id.sensor);
+
+
+            //burada düzeltmeler yapılacak alanlar boşsa hata veriyor kapatıyor falan
+        tarlaEkle=(Button) findViewById(R.id.tarlaEkle);
+        tarlaEkle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    tarlaUrun = mCardAdapter.urun.toString();
+                    tarlaUrunCesid = mCardAdapter.urunCesidi.toString();
+                    tarlaSulama = mCardAdapter.sulamaTipi.toString();
+                    tarlaToprak = mCardAdapter.sulamaTipi.toString();
+                }
+                catch(OutOfMemoryError e1){
+
+                    Toast.makeText(getApplicationContext(), "Tüm alanları eksiksiz doldurun", Toast.LENGTH_LONG).show();
+
+                }
+
+                if ((tarla_name.getText()==null) || (tarla_buyuklugu.getText()==null)  ||(verim.getText() ==null)||(tarlaUrun==null) || (tarlaUrunCesid==null)
+                        ||(tarlaSulama==null)||(tarlaToprak==null)||(tarlaYer==null) ||(tarlaEkimTarih==null) ||(tarlaHasatTarih==null))
+                {
+
+                    Toast.makeText(getApplicationContext(),"Tüm alanları eksiksiz doldurun",Toast.LENGTH_LONG).show();
+
+                }
+                else{
+
+                    try {
+                        Database db = new Database(getApplicationContext());
+                        tarlaAdi = tarla_name.getText().toString();
+                        tarlaBuyukluk = Integer.parseInt(tarla_buyuklugu.getText().toString());
+                        tarlaVerim = Integer.parseInt(verim.getText().toString());
+
+                        db.tarlaEkle(tarlaAdi, tarlaBuyukluk, tarlaVerim, tarlaUrun, tarlaUrunCesid, tarlaToprak, tarlaSulama, tarlaYer, tarlaHasatTarih, tarlaEkimTarih);
+
+                        Toast.makeText(getApplicationContext(), "Veritabanına eklendi ama şu an görüntüleyemezsiniz.", Toast.LENGTH_LONG).show();
+                    }
+                    catch(OutOfMemoryError e1){
+
+                        Toast.makeText(getApplicationContext(), "Tüm alanları eksiksiz doldurun", Toast.LENGTH_LONG).show();
+
+                    }
+
+                }
+            }
+        });
 /*/*/
 //
 //        ///*******SPİNNER İŞLEMLERİ*****///////
@@ -208,6 +271,7 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
                         ekimZamani = dayOfMonth + "/" + (++monthOfYear) + "/" + year;
 
                         ekim_tarih.setText("Ekim Tarihi: " + ekimZamani);
+                        tarlaEkimTarih=ekimZamani;
                     }
                 });
 
@@ -239,6 +303,7 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
                         hasatZamani = dayOfMonth + "/" + (++monthOfYear) + "/" + year;
 
                         hasat_tarih.setText("Hasat Tarihi:" + hasatZamani);
+                        tarlaHasatTarih=hasatZamani;
                     }
                 });
 
