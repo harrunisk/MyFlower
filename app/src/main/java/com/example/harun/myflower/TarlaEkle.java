@@ -160,7 +160,7 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
 
                                 tarlaBuyukluk = Integer.parseInt(tarla_buyuklugu.getText().toString());
                                 tarlaVerim = Integer.parseInt(verim.getText().toString());
-
+                                tarlaAdi=tarla_name.getText().toString();
                                 Database db = new Database(getApplicationContext());
                                 db.tarlaEkle(tarlaAdi, tarlaBuyukluk, tarlaVerim, tarlaUrun, tarlaUrunCesid, tarlaToprak, tarlaSulama, tarlaYer, tarlaHasatTarih, tarlaEkimTarih);
                                 Toast.makeText(getApplicationContext(), "Veritabanına eklendi ama şu an görüntüleyemezsiniz.", Toast.LENGTH_LONG).show();
