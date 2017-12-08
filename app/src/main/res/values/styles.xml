@@ -14,6 +14,9 @@
         <item name="colorPrimaryDark">@color/OrangeRed</item>
     </style>
 
+    <style name="ButtonStyle" parent="Base.Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/OrangeRed</item>
+    </style>
 
     <style name="My_AppTheme.Dark.Dialog" parent="Theme.AppCompat.Dialog">
         <item name="colorAccent">@color/white</item>

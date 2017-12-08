@@ -8,4 +8,10 @@
     <string name="toprak">Toprak Tipi</string>
     <string name="urun">Ürün Çeşidi</string>
 
+    <string name="title_1">Mahsul Sec</string>
+    <string name="title_2">Ürün Çeşidi</string>
+    <string name="title_3">Toprak Tipi</string>
+    <string name="title_4">Sulama Tipi</string>
+
+    <string name="text_1">Spinnerlar eklicem</string>
 </resources>
