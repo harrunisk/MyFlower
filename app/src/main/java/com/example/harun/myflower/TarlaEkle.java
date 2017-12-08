@@ -4,30 +4,28 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.harun.myflower.CardFragment.CardAdapter;
 import com.example.harun.myflower.CardFragment.CardItem;
 import com.example.harun.myflower.CardFragment.CardPagerAdapter;
 import com.example.harun.myflower.CardFragment.ShadowTransformer;
@@ -43,12 +41,11 @@ import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, LocationSource.OnLocationChangedListener {
     EditText tarla_name, tarla_buyuklugu, verim;
     Spinner mahsul, urun, toprak_tipi, sulama_tipi;
-    Button map, hasat_tarih, ekim_tarih, sensor,tarlaEkle;
+    Button map, hasat_tarih, ekim_tarih, sensor, tarlaEkle;
     GoogleMap googleMap;
     LatLng latLng2;
     Button iptal, yesBtn, noBtn;
@@ -61,21 +58,127 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
     private ShadowTransformer mCardShadowTransformer;
 
     //database'e göndereceğim değişikenler
-    String tarlaAdi,tarlaUrun,tarlaUrunCesid,tarlaToprak,tarlaSulama,tarlaYer,tarlaHasatTarih,tarlaEkimTarih;
+    String tarlaAdi, tarlaUrun, tarlaUrunCesid, tarlaToprak, tarlaSulama, tarlaYer, tarlaHasatTarih, tarlaEkimTarih;
     Integer tarlaBuyukluk, tarlaVerim;
-
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tarla_ekle3);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
-        //  toolbar.setLogo();
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
+
+        tarla_name = (EditText) findViewById(R.id.tarla_name);
+        tarla_buyuklugu = (EditText) findViewById(R.id.tarla_buyuk);
+        verim = (EditText) findViewById(R.id.verim);
+        map = (Button) findViewById(R.id.map_ekle);
+        hasat_tarih = (Button) findViewById(R.id.hasat_tarih);
+        ekim_tarih = (Button) findViewById(R.id.ekim_tarih);
+        sensor = (Button) findViewById(R.id.sensor);
+
+
         toolbar.setTitle("Tarla Ekle");
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // setSupportActionBar(toolbar);
+        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.inflateMenu(R.menu.toolbar_menu);
+
+
+        /////*****İPTAL BUTONU BURAYA ALERT DİALOG GELECEK**/////
+        toolbar.setNavigationIcon(R.drawable.ic_delete);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog alertDialog= new AlertDialog.Builder(TarlaEkle.this).create();
+                alertDialog.setTitle("İptal Etmek İstiyor musunuz?");
+                alertDialog.setMessage("İptal Ederseniz Girmiş Olduğunuz Veriler Kaybolacak");
+
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Evet",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                finish();
+                            }
+                        });
+                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Hayır",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
+
+            }
+        });
+
+
+        ///****KAYIT ETME BÖLÜMÜ *//////
+        Toolbar.OnMenuItemClickListener mMenuItemListener = new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.action_done:
+                        /***BOS OLUP OLMADIKLARINN KONTROLU **/
+
+                        tarlaUrun = mCardAdapter.urun;
+                        tarlaUrunCesid = mCardAdapter.urunCesidi;
+                        tarlaToprak = mCardAdapter.toprakTipi;
+                        tarlaSulama = mCardAdapter.sulamaTipi;
+
+
+                        if (TextUtils.isEmpty(tarla_name.getText())) {
+                            tarla_name.setError("Tarla Adı Girin");
+
+
+                        } else if (TextUtils.isEmpty(tarla_buyuklugu.getText())) {
+
+                            tarla_buyuklugu.setError("Tarla Büyüklüğü Giriniz");
+
+                        } else if (TextUtils.isEmpty(verim.getText())) {
+                            verim.setError("Verim Beklentinizi Giriniz ");
+                        } else if (TextUtils.isEmpty(tarlaUrun)) {
+                            Toast.makeText(getApplicationContext(), "Mahsul Tipi Seçiniz ", Toast.LENGTH_SHORT).show();
+
+                        } else if (TextUtils.isEmpty(tarlaUrunCesid)) {
+                            Toast.makeText(getApplicationContext(), "Ürün Çeşidi Seçiniz ", Toast.LENGTH_SHORT).show();
+                        }
+                        else if (TextUtils.isEmpty(tarlaToprak)) {
+                            Toast.makeText(getApplicationContext(), "ToprakTipi Seçiniz ", Toast.LENGTH_SHORT).show();
+                        }else if (TextUtils.isEmpty(tarlaSulama)) {
+                            Toast.makeText(getApplicationContext(), "Sulama Tipi Seçiniz ", Toast.LENGTH_SHORT).show();
+                        }  else if (TextUtils.isEmpty(tarlaYer)) {
+                            map.setError("Tarla Yeri Seçiniz");
+                        }
+                        else if (TextUtils.isEmpty(tarlaHasatTarih)) {
+                            hasat_tarih.setError("Hasat Tarihi Seçiniz");
+                        }else if (TextUtils.isEmpty(tarlaEkimTarih)) {
+                            ekim_tarih.setError("Ekim Tarihi Seçiniz");
+                        }
+
+                        /*************TUM HERSEY TAMAMSA EKLEME GERCEKLESTIRLECEK**********///
+                        else {
+                            try {
+
+                                tarlaBuyukluk = Integer.parseInt(tarla_buyuklugu.getText().toString());
+                                tarlaVerim = Integer.parseInt(verim.getText().toString());
+
+                                Database db = new Database(getApplicationContext());
+                                db.tarlaEkle(tarlaAdi, tarlaBuyukluk, tarlaVerim, tarlaUrun, tarlaUrunCesid, tarlaToprak, tarlaSulama, tarlaYer, tarlaHasatTarih, tarlaEkimTarih);
+                                Toast.makeText(getApplicationContext(), "Veritabanına eklendi ama şu an görüntüleyemezsiniz.", Toast.LENGTH_LONG).show();
+                                finish();
+                            }
+                            catch (Exception hata){
+                                Toast.makeText(getApplicationContext(), "Tüm alanları eksiksiz doldurun : "+hata, Toast.LENGTH_LONG).show();
+                            }
+
+
+                        }
+                        return true;
+                }
+                return false;
+            }
+        };
+
+        toolbar.setOnMenuItemClickListener(mMenuItemListener);
 
         final ArrayList<String> urunListe = new ArrayList<String>();
 
@@ -100,6 +203,7 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
         sulamaListe.add("armut");
         sulamaListe.add("zeytin");
 
+        /*View PAger BÖLÜMÜ */
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
         mCardAdapter = new CardPagerAdapter(this);
         mCardAdapter.addCardItem(new CardItem(R.string.title_1, urunListe)); // HACI BAK LİSTEYİ BURDAN GÖNDERECEN VERİ TABANINDA CEK BURAYA KOY
@@ -112,23 +216,11 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
         mViewPager.setOffscreenPageLimit(3);
         mCardShadowTransformer.enableScaling(true);
 
+/********************************************/
 
 
-        tarla_name = (EditText) findViewById(R.id.tarla_name);
-        tarla_buyuklugu = (EditText) findViewById(R.id.tarla_buyuk);
-        verim = (EditText) findViewById(R.id.verim);
-        //mahsul = (Spinner) findViewById(R.id.mahsul_spinner);
-        // urun = (Spinner) findViewById(R.id.urun_spinner);
-        // toprak_tipi = (Spinner) findViewById(R.id.toprak_tipi);
-        // sulama_tipi = (Spinner) findViewById(R.id.sulama_tipi);
-        map = (Button) findViewById(R.id.map_ekle);
-        hasat_tarih = (Button) findViewById(R.id.hasat_tarih);
-        ekim_tarih = (Button) findViewById(R.id.ekim_tarih);
-        sensor = (Button) findViewById(R.id.sensor);
-
-
-            //burada düzeltmeler yapılacak alanlar boşsa hata veriyor kapatıyor falan
-        tarlaEkle=(Button) findViewById(R.id.tarlaEkle);
+     /*   //burada düzeltmeler yapılacak alanlar boşsa hata veriyor kapatıyor falan
+        tarlaEkle = (Button) findViewById(R.id.tarlaEkle);
         tarlaEkle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,21 +229,18 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
                     tarlaUrunCesid = mCardAdapter.urunCesidi.toString();
                     tarlaSulama = mCardAdapter.sulamaTipi.toString();
                     tarlaToprak = mCardAdapter.sulamaTipi.toString();
-                }
-                catch(OutOfMemoryError e1){
+                } catch (OutOfMemoryError e1) {
 
                     Toast.makeText(getApplicationContext(), "Tüm alanları eksiksiz doldurun", Toast.LENGTH_LONG).show();
 
                 }
 
-                if ((tarla_name.getText()==null) || (tarla_buyuklugu.getText()==null)  ||(verim.getText() ==null)||(tarlaUrun==null) || (tarlaUrunCesid==null)
-                        ||(tarlaSulama==null)||(tarlaToprak==null)||(tarlaYer==null) ||(tarlaEkimTarih==null) ||(tarlaHasatTarih==null))
-                {
+                if ((tarla_name.getText() == null) || (tarla_buyuklugu.getText() == null) || (verim.getText() == null) || (tarlaUrun == null) || (tarlaUrunCesid == null)
+                        || (tarlaSulama == null) || (tarlaToprak == null) || (tarlaYer == null) || (tarlaEkimTarih == null) || (tarlaHasatTarih == null)) {
 
-                    Toast.makeText(getApplicationContext(),"Tüm alanları eksiksiz doldurun",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Tüm alanları eksiksiz doldurun", Toast.LENGTH_LONG).show();
 
-                }
-                else{
+                } else {
 
                     try {
                         Database db = new Database(getApplicationContext());
@@ -162,8 +251,7 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
                         db.tarlaEkle(tarlaAdi, tarlaBuyukluk, tarlaVerim, tarlaUrun, tarlaUrunCesid, tarlaToprak, tarlaSulama, tarlaYer, tarlaHasatTarih, tarlaEkimTarih);
 
                         Toast.makeText(getApplicationContext(), "Veritabanına eklendi ama şu an görüntüleyemezsiniz.", Toast.LENGTH_LONG).show();
-                    }
-                    catch(OutOfMemoryError e1){
+                    } catch (OutOfMemoryError e1) {
 
                         Toast.makeText(getApplicationContext(), "Tüm alanları eksiksiz doldurun", Toast.LENGTH_LONG).show();
 
@@ -172,58 +260,7 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
                 }
             }
         });
-/*/*/
-//
-//        ///*******SPİNNER İŞLEMLERİ*****///////
-//
-//        mahsul.setOnItemSelectedListener(this);
-//        final List<String> mahsulListe = new ArrayList<String>();
-//        mahsulListe.add("Mahsül Seçimi");
-//        mahsulListe.add("elma");
-//        mahsulListe.add("armut");
-//        mahsulListe.add("zeytin");
-//
-//
-//        final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, mahsulListe);
-//        mahsul.setAdapter(dataAdapter);
-//        ///**************************************//////
-//
-//        urun.setOnItemSelectedListener(this);
-//        final List<String> urunListe = new ArrayList<String>();
-//        urunListe.add("Ürün Çeşidi");
-//        urunListe.add("Arbosona");
-//        urunListe.add("Çeşit1");
-//        urunListe.add("Çeşit2");
-//
-//        final ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, urunListe);
-//        urun.setAdapter(dataAdapter2);
-//
-//
-//        sulama_tipi.setOnItemSelectedListener(this);
-//        final List<String> sulamaListe = new ArrayList<String>();
-//        sulamaListe.add("Sulama Tipi");
-//        sulamaListe.add("Tip1");
-//        sulamaListe.add("Tip2");
-//        sulamaListe.add("Tip3");
-//
-//        final ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, sulamaListe);
-//        sulama_tipi.setAdapter(dataAdapter3);
-//
-//
-//        toprak_tipi.setOnItemSelectedListener(this);
-//        final List<String> toprakListe = new ArrayList<String>();
-//        toprakListe.add("Toprak Tipi");
-//        toprakListe.add("Tip1");
-//        toprakListe.add("Tip2");
-//        toprakListe.add("Tip3");
-//
-//        final ArrayAdapter<String> dataAdapter4 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, toprakListe);
-//        toprak_tipi.setAdapter(dataAdapter4);
-//
-//
-//
-//
-
+*/
 
         map.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -271,7 +308,7 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
                         ekimZamani = dayOfMonth + "/" + (++monthOfYear) + "/" + year;
 
                         ekim_tarih.setText("Ekim Tarihi: " + ekimZamani);
-                        tarlaEkimTarih=ekimZamani;
+                        tarlaEkimTarih = ekimZamani;
                     }
                 });
 
@@ -303,7 +340,7 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
                         hasatZamani = dayOfMonth + "/" + (++monthOfYear) + "/" + year;
 
                         hasat_tarih.setText("Hasat Tarihi:" + hasatZamani);
-                        tarlaHasatTarih=hasatZamani;
+                        tarlaHasatTarih = hasatZamani;
                     }
                 });
 
@@ -413,7 +450,7 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
                     if (!map.isClickable()) {
                         dialog2.dismiss();
                         map.setText(latLng2.toString());
-                        tarlaYer=latLng2.toString();
+                        tarlaYer = latLng2.toString();
 
                         //getFragmentManager().beginTransaction().remove(f).commit();
                         f.onStop();

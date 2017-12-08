@@ -11,4 +11,5 @@
     <dimen name="category_padding_bottom">5dp</dimen>
     <dimen name="category_count">12dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_size">16dp</dimen>
 </resources>
