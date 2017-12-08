@@ -43,6 +43,7 @@ TextView username;
     ArrayAdapter adapter;
     ArrayList<HashMap<String,String>> sensorVeriListe;
     String sicaklik_Veri[];
+    String sicaklik_Veri2[];
     String nem_Veri[];
     String isik_Veri[];
     String tum_Veri[];

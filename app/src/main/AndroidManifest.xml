@@ -25,7 +25,11 @@
         <activity
             android:name=".Login"
             android:theme="@style/AppTheme2">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".AnasayfaActivity"/>
         <activity android:name=".TarlaBilgi1"/>
@@ -52,13 +56,7 @@
         <activity android:name=".DetailsHaber" />
         <activity android:name=".Tarla" />
 
-        <activity android:name=".TarlaEkle" android:theme="@style/AppTheme2" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".TarlaEkle" android:theme="@style/AppTheme2" ></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

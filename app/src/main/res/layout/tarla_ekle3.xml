@@ -204,6 +204,18 @@
                     android:textSize="15dp">
 
                 </Button>
+                <Button
+                    android:id="@+id/tarlaEkle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tarla Ekle"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/transparent"
+                    android:padding="10dp"
+                    android:textColor="@color/OrangeRed"
+                    android:textColorHint="@color/OrangeRed"
+                    android:textSize="15dp"/>
 
             </LinearLayout>
 
