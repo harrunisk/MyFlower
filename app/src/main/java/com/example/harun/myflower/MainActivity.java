@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
+                    mDrawer.closeDrawers();
                  toolbar.onDrawerOpened(mDrawer);
                     if(item.getItemId()==R.id.haber){
                         Intent intent = new Intent(MainActivity.this, Haberler.class);

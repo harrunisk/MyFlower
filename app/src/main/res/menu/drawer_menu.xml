@@ -8,11 +8,11 @@
         android:title="Anasayfa" />
     <item android:title="Tarlalarım"
         android:id="@+id/tarla"
-        android:icon="@drawable/taractor"/>
+        android:icon="@drawable/tractor"/>
 
     <item android:title="Tarla Ekle"
         android:id="@+id/add_tarla"
-        android:icon="@drawable/addtarla"/>
+        android:icon="@drawable/tarlaekle"/>
 
     <item android:title="Ürün Fiyatları"
         android:id="@+id/ürün_fyt"
@@ -20,7 +20,7 @@
 
     <item
         android:id="@+id/mahsül"
-        android:icon="@drawable/mahsul"
+        android:icon="@drawable/wheat"
         android:title="Mahsül Ara" />
 
     <item android:title="Haberler"
@@ -29,11 +29,11 @@
 
     <item android:title="Ayarlar"
         android:id="@+id/ayar"
-        android:icon="@android:drawable/arrow_up_float"/>
+        android:icon="@drawable/settings"/>
 
     <item android:title="Çıkış"
         android:id="@+id/cikis"
-        android:icon="@android:drawable/arrow_up_float"/>
+        android:icon="@drawable/exit"/>
 
 
 

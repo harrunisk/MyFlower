@@ -82,7 +82,7 @@ private ActionBarDrawerToggle toolbar;
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
+           mDrawer.closeDrawers();//DRAVER LAYOUT KISMI GERİ GELİNCE KAPANMIYORDU ONUN İÇİN EKLEDİM
 
                     if(item.getItemId()==R.id.haber){
                         Intent intent = new Intent(AnasayfaActivity.this, Haberler.class);

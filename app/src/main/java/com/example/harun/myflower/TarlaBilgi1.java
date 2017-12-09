@@ -1,9 +1,8 @@
 package com.example.harun.myflower;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,6 +33,7 @@ public class TarlaBilgi1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tarla_bilgi_1);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //hava durumu resimleri
         gun1Resim=(ImageView) findViewById(R.id.gun1Resim);
@@ -69,7 +69,6 @@ public class TarlaBilgi1 extends AppCompatActivity {
         tarlaToprak=(TextView) findViewById(R.id.tarlaToprak);
         tarlaVerim=(TextView) findViewById(R.id.tarlaVerim);
 
-
         //veritabanı işlemleri
         Bundle extra=getIntent().getExtras();
         String a =extra.getString("iddeger");
@@ -95,7 +94,19 @@ public class TarlaBilgi1 extends AppCompatActivity {
 
 
 
+        getSupportActionBar().setTitle(map.get("TARLA_ADI")+" Detaylar");
 
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

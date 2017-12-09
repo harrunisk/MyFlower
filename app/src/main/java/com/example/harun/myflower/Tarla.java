@@ -194,6 +194,8 @@ public class Tarla extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+            mDrawer.closeDrawers();
+
                 if(item.getItemId()==R.id.haber){
                     Intent intent = new Intent(Tarla.this, Haberler.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
