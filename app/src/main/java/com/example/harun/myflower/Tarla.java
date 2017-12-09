@@ -92,7 +92,7 @@ public class Tarla extends AppCompatActivity {
                 intent.putExtra("iddeger",id);
                 startActivity(intent);
                 overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-                finish();
+               // finish();
 
 
 
@@ -198,7 +198,7 @@ public class Tarla extends AppCompatActivity {
                 if(item.getItemId()==R.id.haber){
                     Intent intent = new Intent(Tarla.this, Haberler.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra("username",username2);
+                    //intent.putExtra("username",username2);
 
                     startActivity(intent);
                     finish();
@@ -208,14 +208,15 @@ public class Tarla extends AppCompatActivity {
                 if(item.getItemId()==R.id.Anasayfa){
                     Intent intent = new Intent(Tarla.this, AnasayfaActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra("username",username2);
-
+                   // intent.putExtra("username",username2);
+                    finish();
+                    overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                     startActivity(intent);
                 }
                 if(item.getItemId()==R.id.add_tarla) {
                     Intent intent = new Intent(Tarla.this, TarlaEkle.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra("username",username2);
+                   // intent.putExtra("username",username2);
 
                     startActivity(intent);
                     finish();
@@ -226,7 +227,7 @@ public class Tarla extends AppCompatActivity {
                 if(item.getItemId()==R.id.tarla) {
                     Intent intent = new Intent(Tarla.this, Tarla.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra("username",username2);
+                   // intent.putExtra("username",username2);
 
                     startActivity(intent);
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);

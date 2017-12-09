@@ -28,12 +28,22 @@ public class TarlaBilgi1 extends AppCompatActivity {
     int id;
 
 
+    private MapView mView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tarla_bilgi_1);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+//        mView = (MapView) findViewById(R.id.mapView);
+
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        android.support.v4.app. FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.mapView, new MapFragment(55.854049,13.661331));
+        /**** HACI BURADA GÖNDERDİĞİM LAT LONG KISMINDAN GÖNDERİCEGİMİZ DEĞERLER MAP KISMINDA GÖRÜNCECEK *///
+        fragmentTransaction.commit();
+
 
         //hava durumu resimleri
         gun1Resim=(ImageView) findViewById(R.id.gun1Resim);
@@ -108,5 +118,6 @@ public class TarlaBilgi1 extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 }
