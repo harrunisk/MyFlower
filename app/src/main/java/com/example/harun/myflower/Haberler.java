@@ -104,13 +104,25 @@ public class Haberler extends AppCompatActivity {
                 }
 
                 if(item.getItemId()==R.id.add_tarla) {
-                Intent intent = new Intent(Haberler.this, Tarla.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-                finish();
-                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                    Intent intent = new Intent(Haberler.this, TarlaEkle.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("username",mail);
 
-            }
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
+                }
+
+                if(item.getItemId()==R.id.tarla) {
+                    Intent intent = new Intent(Haberler.this, Tarla.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("username",mail);
+
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
+                }
 
                 return false;
             }

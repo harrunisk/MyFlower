@@ -57,7 +57,8 @@ public class Tarla extends AppCompatActivity {
         mlistview=(ListView)findViewById(R.id.listViewTarla); /// LAYOUT LİSTESİNİ TANIMLADIM
 
 
-
+        Bundle extra=getIntent().getExtras();
+        final String username2=extra.getString("username");
 
         /**ŞİMDİ VERİTABANINDAN VERİLERİ ÇEKİP tarlaArrayLİSTESİne eklemem lazım */
 
@@ -89,8 +90,8 @@ public class Tarla extends AppCompatActivity {
 
                 Intent intent = new Intent(Tarla.this, TarlaBilgi1.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
                 intent.putExtra("iddeger",id);
+                startActivity(intent);
                 overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                 finish();
 
@@ -196,16 +197,37 @@ public class Tarla extends AppCompatActivity {
                 if(item.getItemId()==R.id.haber){
                     Intent intent = new Intent(Tarla.this, Haberler.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("username",username2);
+
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
                 }
-                if(item.getItemId()==R.id.add_tarla) {
-                    Intent intent = new Intent(Tarla.this, Tarla.class);
+                if(item.getItemId()==R.id.Anasayfa){
+                    Intent intent = new Intent(Tarla.this, AnasayfaActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("username",username2);
+
+                    startActivity(intent);
+                }
+                if(item.getItemId()==R.id.add_tarla) {
+                    Intent intent = new Intent(Tarla.this, TarlaEkle.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("username",username2);
+
                     startActivity(intent);
                     finish();
+                    overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
+                }
+
+                if(item.getItemId()==R.id.tarla) {
+                    Intent intent = new Intent(Tarla.this, Tarla.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("username",username2);
+
+                    startActivity(intent);
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
                 }

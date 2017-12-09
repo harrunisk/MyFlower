@@ -72,7 +72,7 @@ private ActionBarDrawerToggle toolbar;
       tarla.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-              Intent intent = new Intent(AnasayfaActivity.this, MainActivity.class);
+              Intent intent = new Intent(AnasayfaActivity.this, Tarla.class);
               intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
               intent.putExtra("username",username2);
               startActivity(intent);
@@ -97,8 +97,19 @@ private ActionBarDrawerToggle toolbar;
                         startActivity(intent);
                     }
                     if(item.getItemId()==R.id.add_tarla) {
+                        Intent intent = new Intent(AnasayfaActivity.this, TarlaEkle.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("username",username2);
+
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
+                    }
+                    if(item.getItemId()==R.id.tarla) {
                         Intent intent = new Intent(AnasayfaActivity.this, Tarla.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("username",username2);
+
                         startActivity(intent);
                         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 

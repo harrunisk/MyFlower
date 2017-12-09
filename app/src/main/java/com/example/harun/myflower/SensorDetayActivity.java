@@ -67,8 +67,7 @@ public class SensorDetayActivity extends Activity{
                         Database db=new Database(getApplicationContext());
                         db.sensorVeriSil(id);
                         Toast.makeText(getApplicationContext(),"Sensör verisi silindi",Toast.LENGTH_LONG).show();
-                        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                        startActivity(intent);
+
                         finish();
                     }
                 });

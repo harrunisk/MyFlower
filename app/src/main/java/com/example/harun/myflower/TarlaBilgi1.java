@@ -18,14 +18,15 @@ import java.util.HashMap;
 
 public class TarlaBilgi1 extends AppCompatActivity {
 
-ImageView gun1Resim, gun2Resim,gun3Resim;
-TextView gun1HavaDurumu,gun2HavaDurumu,gun3HavaDurumu;
-TextView gun1,gun2,gun3;
-TextView gun1Yagis,gun2Yagis,gun3Yagis;
-TextView tarlaAdi,tarlaBuyukluk,tarlaUrun,tarlaUrunCesid,tarlaEkimTarih,tarlaHasatTarih,tarlaSulama,tarlaToprak,tarlaVerim;
-MapView tarlaYer;
-String tarlaKoordinat;
-int id;
+
+    ImageView gun1Resim, gun2Resim,gun3Resim;
+    TextView gun1HavaDurumu,gun2HavaDurumu,gun3HavaDurumu;
+    TextView gun1,gun2,gun3;
+    TextView gun1Yagis,gun2Yagis,gun3Yagis;
+    TextView tarlaAdi,tarlaBuyukluk,tarlaUrun,tarlaUrunCesid,tarlaEkimTarih,tarlaHasatTarih,tarlaSulama,tarlaToprak,tarlaVerim;
+    MapView tarlaYer;
+    String tarlaKoordinat;
+    int id;
 
 
     @Override
@@ -70,11 +71,11 @@ int id;
 
 
         //veritabanı işlemleri
+        Bundle extra=getIntent().getExtras();
+        String a =extra.getString("iddeger");
+        int id=Integer.parseInt(a);
 
-        Intent intent=getIntent();
-        //id=intent.getIntExtra("id",0);
 
-        id=2;
         Database db=new Database(getApplicationContext());
 
         HashMap<String, String> map =db.idTarlaVeri(id);

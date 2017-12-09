@@ -36,8 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
     MqttHelper mqttHelper;
     ChartHelper mChart;
-    LineChart chart;
-TextView username;
+    LineChart chart,chart2;
+    TextView username;
+    ChartHelper mChart2;
 
     ListView lv;
     ArrayAdapter adapter;
@@ -52,14 +53,16 @@ TextView username;
     String tarih_Veri[];
     SharedPreferences preferences;//preferences referansı
     SharedPreferences.Editor editor;
-private DrawerLayout mDrawer;
-private ActionBarDrawerToggle toolbar;
+    private DrawerLayout mDrawer;
+    private ActionBarDrawerToggle toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         chart = (LineChart) findViewById(R.id.chart);
+        chart2 = (LineChart) findViewById(R.id.chart);
+
         mChart = new ChartHelper(chart);
 
         mDrawer=(DrawerLayout)findViewById(R.id.drawer);
@@ -67,14 +70,16 @@ private ActionBarDrawerToggle toolbar;
         mDrawer.addDrawerListener(toolbar);
         toolbar.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        func();
         startMqtt();
+
 
         final NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
         username=(TextView)navigationView.getHeaderView(0).findViewById(R.id.username);
 
-        Bundle extra=getIntent().getExtras();
-        final String username2=extra.getString("username");
-        username.setText(username2);
+       // Bundle extra=getIntent().getExtras();
+        //final String username2=extra.getString("username");
+        //username.setText(username2);
 
         /*ImageView iv = (ImageView)navigationView.findViewById(R.id.nav_image);
         iv.setColorFilter(Color.argb(150, 155, 155, 155),   PorterDuff.Mode.SRC_ATOP);
@@ -107,7 +112,7 @@ private ActionBarDrawerToggle toolbar;
                     if(item.getItemId()==R.id.Anasayfa){
                         Intent intent = new Intent(MainActivity.this, AnasayfaActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        intent.putExtra("username",username2);
+                       // intent.putExtra("username",username2);
 
                         startActivity(intent);
                     }
@@ -158,7 +163,7 @@ private ActionBarDrawerToggle toolbar;
                 Database db=new Database(getApplicationContext());
 
                 db.sensorVeriEkle(seperated[0],seperated[1],seperated[2],date.toString() );
-                func();
+                func2();
             }
 
             @Override
@@ -171,8 +176,8 @@ private ActionBarDrawerToggle toolbar;
     public void onResume(){
 
 super.onResume();
-        func();
 
+func3();
 
     }
     public void func(){
@@ -213,6 +218,126 @@ super.onResume();
             {
 
                 mChart.addEntry(Float.valueOf(sicaklik_Veri[i].toString()));
+
+
+            }
+
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    Intent intent=new Intent(getApplicationContext(),SensorDetayActivity.class);
+                    intent.putExtra("id",(int)id_Veri[position]);
+                    startActivity(intent);
+
+                }
+            });
+
+
+
+        }
+    }
+    public void func2(){
+        Database db=new Database(getApplicationContext());
+
+        sensorVeriListe=db.tumSensorVeriGetir();
+
+
+        if (sensorVeriListe.size()==0){
+            Toast.makeText(getApplicationContext(),"Sensor verisi yok ",Toast.LENGTH_LONG).show();
+        }
+        else{
+            sicaklik_Veri=new String[sensorVeriListe.size()];
+            nem_Veri=new String[sensorVeriListe.size()];
+            isik_Veri=new String[sensorVeriListe.size()];
+            tarih_Veri=new String[sensorVeriListe.size()];
+            id_Veri= new int[sensorVeriListe.size()];
+            tum_Veri=new String[sensorVeriListe.size()];
+            for(int i=0; i<sensorVeriListe.size();i++)
+            {
+                sicaklik_Veri[i]=sensorVeriListe.get(i).get("SENSON_SICAKLIK");
+                nem_Veri[i]=sensorVeriListe.get(i).get("SENSOR_NEM");
+                isik_Veri[i]=sensorVeriListe.get(i).get("SENSOR_ISIK");
+                tarih_Veri[i]=sensorVeriListe.get(i).get("SENSOR_TARIH");
+                id_Veri[i]=Integer.parseInt(sensorVeriListe.get(i).get("ID"));
+
+                tum_Veri[i]=tarih_Veri[i]+"    "+sicaklik_Veri[i]+"°C     "+" %"+nem_Veri[i]+"       "+isik_Veri[i]+" Lux";
+
+
+
+
+            }
+
+            lv=(ListView)findViewById(R.id.listView);
+            adapter=new ArrayAdapter(this,R.layout.list_item,R.id.list_item_text ,tum_Veri);
+            lv.setAdapter(adapter);
+
+
+
+                mChart.addEntry(Float.valueOf(sicaklik_Veri[sensorVeriListe.size()-1].toString()));
+
+
+
+
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    Intent intent=new Intent(getApplicationContext(),SensorDetayActivity.class);
+                    intent.putExtra("id",(int)id_Veri[position]);
+                    startActivity(intent);
+
+                }
+            });
+
+
+
+        }
+    }
+    public void func3(){
+        Database db=new Database(getApplicationContext());
+
+        sensorVeriListe=db.tumSensorVeriGetir();
+
+
+        if (sensorVeriListe.size()==0){
+            Toast.makeText(getApplicationContext(),"Sensor verisi yok ",Toast.LENGTH_LONG).show();
+        }
+        else{
+            sicaklik_Veri=new String[sensorVeriListe.size()];
+            nem_Veri=new String[sensorVeriListe.size()];
+            isik_Veri=new String[sensorVeriListe.size()];
+            tarih_Veri=new String[sensorVeriListe.size()];
+            id_Veri= new int[sensorVeriListe.size()];
+            tum_Veri=new String[sensorVeriListe.size()];
+            for(int i=0; i<sensorVeriListe.size();i++)
+            {
+                sicaklik_Veri[i]=sensorVeriListe.get(i).get("SENSON_SICAKLIK");
+                nem_Veri[i]=sensorVeriListe.get(i).get("SENSOR_NEM");
+                isik_Veri[i]=sensorVeriListe.get(i).get("SENSOR_ISIK");
+                tarih_Veri[i]=sensorVeriListe.get(i).get("SENSOR_TARIH");
+                id_Veri[i]=Integer.parseInt(sensorVeriListe.get(i).get("ID"));
+
+                tum_Veri[i]=tarih_Veri[i]+"    "+sicaklik_Veri[i]+"°C     "+" %"+nem_Veri[i]+"       "+isik_Veri[i]+" Lux";
+
+
+
+
+            }
+
+            lv=(ListView)findViewById(R.id.listView);
+            adapter=new ArrayAdapter(this,R.layout.list_item,R.id.list_item_text ,tum_Veri);
+            lv.setAdapter(adapter);
+            mChart2=new ChartHelper(chart2);
+            for (int i=0;i<sensorVeriListe.size();i++)
+            {
+
+                mChart2.addEntry(Float.valueOf(sicaklik_Veri[i].toString()));
+
 
             }
 

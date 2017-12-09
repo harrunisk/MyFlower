@@ -62,7 +62,7 @@ public class SensorVeriDuzenleActivity  extends Activity {
                     db.close();
                     Toast.makeText(getApplicationContext(), "Sensör verisi düzenlendi", Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                    startActivity(intent);
+
                     finish();
 
 
