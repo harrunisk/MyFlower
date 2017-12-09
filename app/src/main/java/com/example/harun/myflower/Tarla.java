@@ -1,5 +1,6 @@
 package com.example.harun.myflower;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,14 +16,15 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.harun.myflower.Tarlalarım.listAdapter_tarla;
+import com.example.harun.myflower.Tarlalarım.listModel_tarla;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class Tarla extends AppCompatActivity {
     TextView username;
@@ -39,27 +41,85 @@ public class Tarla extends AppCompatActivity {
     Animation hide_fab_1;
     Animation show_fab_2;
     Animation hide_fab_2;
+    Database database;
+    ArrayList<listModel_tarla> tarlaArrayList;
+    listAdapter_tarla listAdapterTarla;
+    listModel_tarla listModelTarla;
+    public ListView mlistview;
 
-
-    //listview
-    ListView lv;
-    ArrayAdapter adapter;
-
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tarla);
-        //listview
 
-        final ArrayList<String> urunListe = new ArrayList<String>();
+        database = new Database(this);
+        mlistview=(ListView)findViewById(R.id.listViewTarla); /// LAYOUT LİSTESİNİ TANIMLADIM
+
+
+
+
+        /**ŞİMDİ VERİTABANINDAN VERİLERİ ÇEKİP tarlaArrayLİSTESİne eklemem lazım */
+
+        tarlaArrayList=database.tarlaListele();
+
+        listAdapterTarla=new listAdapter_tarla(tarlaArrayList,this); // ADAPTERE LİSTEMİ GÖNDERİYORUM
+        mlistview.setAdapter(listAdapterTarla); //ADAPTERİDE ONAYLADIM
+        listAdapterTarla.notifyDataSetChanged();
+
+        mlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+                String tarlaadi=tarlaArrayList.get(i).getTarla_adi();
+                String tarlaurun=tarlaArrayList.get(i).getUrun();
+                String cesit=tarlaArrayList.get(i).getUrunCesid();
+                String hasat=tarlaArrayList.get(i).getTvHasat();
+                String ekim=tarlaArrayList.get(i).getTvEkim();
+                String id=tarlaArrayList.get(i).getId();
+
+                Toast.makeText(getApplicationContext(),"AL BU DEĞERLERİ TEPE TEPE KULLAN REİS "+"\nTarla ADi :" + tarlaadi
+                                + "\nürün  " + tarlaurun
+                                + "\ncesit  " + cesit
+                                + "\nhasat  " + hasat
+                                + "\nekim  :" + ekim
+                                + "\nIDDEGERi  :" + id
+                        , Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(Tarla.this, TarlaBilgi1.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                intent.putExtra("iddeger",id);
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                finish();
+
+
+
+            }
+        });
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab1 = (FloatingActionButton) findViewById(R.id.fab_1);
+        fab2 = (FloatingActionButton) findViewById(R.id.fab_2);
+
+        show_fab_1 = AnimationUtils.loadAnimation(getApplication(), R.anim.fab1_show);
+        hide_fab_1 = AnimationUtils.loadAnimation(getApplication(), R.anim.fab1_hide);
+        show_fab_2 = AnimationUtils.loadAnimation(getApplication(), R.anim.fab3_show);
+        hide_fab_2 = AnimationUtils.loadAnimation(getApplication(), R.anim.fab3_hide);
+
+
+
+
+     /*   final ArrayList<String> urunListe = new ArrayList<String>();
 
         urunListe.add("Ürün");
         urunListe.add("Arbosona");
         urunListe.add("Çeşit1");
-        urunListe.add("Çeşit2");
+        urunListe.add("Çeşit2");*/
 
 
-        lv=(ListView)findViewById(R.id.listViewTarla);
+     /*   lv=(ListView)findViewById(R.id.listViewTarla);
         adapter = new ArrayAdapter(this, R.layout.list_item_tarla,R.id.list_item_text_tarla,urunListe );
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -69,7 +129,7 @@ public class Tarla extends AppCompatActivity {
                 //intent.putExtra("id",(int)id_Veri[position]);
                 startActivity(intent);
             }
-        });
+        });*/
 
 
        // rootLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
@@ -89,14 +149,6 @@ public class Tarla extends AppCompatActivity {
         String mail = preferences.getString("email", "");
         username.setText(mail);
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab1 = (FloatingActionButton) findViewById(R.id.fab_1);
-        fab2 = (FloatingActionButton) findViewById(R.id.fab_2);
-
-        show_fab_1 = AnimationUtils.loadAnimation(getApplication(), R.anim.fab1_show);
-        hide_fab_1 = AnimationUtils.loadAnimation(getApplication(), R.anim.fab1_hide);
-        show_fab_2 = AnimationUtils.loadAnimation(getApplication(), R.anim.fab3_show);
-        hide_fab_2 = AnimationUtils.loadAnimation(getApplication(), R.anim.fab3_hide);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

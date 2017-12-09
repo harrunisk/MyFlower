@@ -9,40 +9,49 @@
 
     <RelativeLayout
 
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:id="@+id/coordinatorLayout"
         android:layout_height="match_parent"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        android:fitsSystemWindows="true"
-        tools:context="com.example.harun.myflower.Haberler">
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentRight="true"
+    android:layout_height="match_parent">
+
+    <!--İÇERİK BURAYA -->
+    <ListView
+        android:id="@+id/listViewTarla"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="10dp"
+        android:divider="@color/white"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentStart="true"
+        />
 
 
-       <!--İÇERİK BURAYA -->
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="14dp"
-            app:backgroundTint="@color/OrangeRed"
-            android:src="@drawable/menu" />
-
+       <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="14dp"
+        app:backgroundTint="@color/OrangeRed"
+        android:src="@drawable/menu" />
         <include layout="@layout/fab_layout" />
 
-        <ListView
-            android:id="@+id/listViewTarla"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/fab"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="18dp" />
+
+</FrameLayout>
+
+
+
 
     </RelativeLayout>
 

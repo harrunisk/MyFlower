@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -29,6 +30,7 @@ import android.widget.Toast;
 import com.example.harun.myflower.CardFragment.CardItem;
 import com.example.harun.myflower.CardFragment.CardPagerAdapter;
 import com.example.harun.myflower.CardFragment.ShadowTransformer;
+import com.example.harun.myflower.Tarlalarım.listAdapter_tarla;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.GoogleMap;
@@ -56,7 +58,8 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
     public String secilen_item;
     private CardPagerAdapter mCardAdapter;
     private ShadowTransformer mCardShadowTransformer;
-
+listAdapter_tarla liste;
+Tarla tarla;
     //database'e göndereceğim değişikenler
     String tarlaAdi, tarlaUrun, tarlaUrunCesid, tarlaToprak, tarlaSulama, tarlaYer, tarlaHasatTarih, tarlaEkimTarih;
     Integer tarlaBuyukluk, tarlaVerim;
@@ -117,6 +120,9 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.action_done:
+                       // MenuItem settingsItem = menuItem.findItem(R.id.action_settings);
+
+                      //  menuItem.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.add));
                         /***BOS OLUP OLMADIKLARINN KONTROLU **/
 
                         tarlaUrun = mCardAdapter.urun;
@@ -163,8 +169,14 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
                                 tarlaAdi=tarla_name.getText().toString();
                                 Database db = new Database(getApplicationContext());
                                 db.tarlaEkle(tarlaAdi, tarlaBuyukluk, tarlaVerim, tarlaUrun, tarlaUrunCesid, tarlaToprak, tarlaSulama, tarlaYer, tarlaHasatTarih, tarlaEkimTarih);
-                                Toast.makeText(getApplicationContext(), "Veritabanına eklendi ama şu an görüntüleyemezsiniz.", Toast.LENGTH_LONG).show();
+
+                               // Toast.makeText(getApplicationContext(), "Veritabanına eklendi ama şu an görüntüleyemezsiniz.", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(TarlaEkle.this, Tarla.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
                                 finish();
+                                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
                             }
                             catch (Exception hata){
                                 Toast.makeText(getApplicationContext(), "Tüm alanları eksiksiz doldurun : "+hata, Toast.LENGTH_LONG).show();
@@ -203,7 +215,7 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
         sulamaListe.add("armut");
         sulamaListe.add("zeytin");
 
-        /*View PAger BÖLÜMÜ */
+        /***View PAger BÖLÜMÜ ***/
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
         mCardAdapter = new CardPagerAdapter(this);
         mCardAdapter.addCardItem(new CardItem(R.string.title_1, urunListe)); // HACI BAK LİSTEYİ BURDAN GÖNDERECEN VERİ TABANINDA CEK BURAYA KOY
@@ -216,51 +228,8 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
         mViewPager.setOffscreenPageLimit(3);
         mCardShadowTransformer.enableScaling(true);
 
-/********************************************/
 
 
-     /*   //burada düzeltmeler yapılacak alanlar boşsa hata veriyor kapatıyor falan
-        tarlaEkle = (Button) findViewById(R.id.tarlaEkle);
-        tarlaEkle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    tarlaUrun = mCardAdapter.urun.toString();
-                    tarlaUrunCesid = mCardAdapter.urunCesidi.toString();
-                    tarlaSulama = mCardAdapter.sulamaTipi.toString();
-                    tarlaToprak = mCardAdapter.sulamaTipi.toString();
-                } catch (OutOfMemoryError e1) {
-
-                    Toast.makeText(getApplicationContext(), "Tüm alanları eksiksiz doldurun", Toast.LENGTH_LONG).show();
-
-                }
-
-                if ((tarla_name.getText() == null) || (tarla_buyuklugu.getText() == null) || (verim.getText() == null) || (tarlaUrun == null) || (tarlaUrunCesid == null)
-                        || (tarlaSulama == null) || (tarlaToprak == null) || (tarlaYer == null) || (tarlaEkimTarih == null) || (tarlaHasatTarih == null)) {
-
-                    Toast.makeText(getApplicationContext(), "Tüm alanları eksiksiz doldurun", Toast.LENGTH_LONG).show();
-
-                } else {
-
-                    try {
-                        Database db = new Database(getApplicationContext());
-                        tarlaAdi = tarla_name.getText().toString();
-                        tarlaBuyukluk = Integer.parseInt(tarla_buyuklugu.getText().toString());
-                        tarlaVerim = Integer.parseInt(verim.getText().toString());
-
-                        db.tarlaEkle(tarlaAdi, tarlaBuyukluk, tarlaVerim, tarlaUrun, tarlaUrunCesid, tarlaToprak, tarlaSulama, tarlaYer, tarlaHasatTarih, tarlaEkimTarih);
-
-                        Toast.makeText(getApplicationContext(), "Veritabanına eklendi ama şu an görüntüleyemezsiniz.", Toast.LENGTH_LONG).show();
-                    } catch (OutOfMemoryError e1) {
-
-                        Toast.makeText(getApplicationContext(), "Tüm alanları eksiksiz doldurun", Toast.LENGTH_LONG).show();
-
-                    }
-
-                }
-            }
-        });
-*/
 
         map.setOnClickListener(new View.OnClickListener() {
             @Override
