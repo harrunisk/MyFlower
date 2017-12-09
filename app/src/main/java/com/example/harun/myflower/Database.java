@@ -41,6 +41,8 @@ public class Database extends SQLiteOpenHelper {
     private static String TARLA_YER = "TARLA_YER";
     private static String TARLA_HASAT_TARIH = "TARLA_HASAT_TARIH";
     private static String TARLA_EKIM_TARIH = "TARLA_EKIM_TARIH";
+    private static String TARLA_LATITUDE = "TARLA_LATITUDE";
+    private static String TARLA_LONGITUDE = "TARLA_LONGITUDE";
 
 
     public Database(Context context) {
@@ -69,7 +71,9 @@ public class Database extends SQLiteOpenHelper {
                 + TARLA_SULAMA + " TEXT,"
                 + TARLA_YER + " TEXT,"
                 + TARLA_HASAT_TARIH + " TEXT,"
-                + TARLA_EKIM_TARIH + " TEXT" + ")";
+                + TARLA_EKIM_TARIH + " TEXT,"
+                + TARLA_LATITUDE + " REAL,"
+                + TARLA_LONGITUDE+ " REAL" +")";
 
 
         db.execSQL(CREATE_TABLE);
@@ -195,7 +199,7 @@ public class Database extends SQLiteOpenHelper {
 
 
     public void tarlaEkle(String tarlaAdi, int tarlaBuyukluk, int tarlaVerim, String tarlaUrun, String tarlaUrunCesid, String tarlaToprak
-            , String tarlaSulama, String tarlaYer, String tarlaHasatTarih, String tarlaEkimTarih) {
+            , String tarlaSulama, String tarlaYer, String tarlaHasatTarih, String tarlaEkimTarih,Double tarlaLatitude, Double tarlaLongitude) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(TARLA_ADI, tarlaAdi);
@@ -208,6 +212,10 @@ public class Database extends SQLiteOpenHelper {
         values.put(TARLA_YER, tarlaYer);
         values.put(TARLA_HASAT_TARIH, tarlaHasatTarih);
         values.put(TARLA_EKIM_TARIH, tarlaEkimTarih);
+        values.put(TARLA_LATITUDE,tarlaLatitude);
+        values.put(TARLA_LONGITUDE,tarlaLongitude);
+
+
         db.insert(TARLA, null, values);
         db.close();
 
@@ -231,6 +239,10 @@ public class Database extends SQLiteOpenHelper {
             tarlaVeri.put(TARLA_YER, cursor.getString(8));
             tarlaVeri.put(TARLA_HASAT_TARIH, cursor.getString(9));
             tarlaVeri.put(TARLA_EKIM_TARIH, cursor.getString(10));
+            tarlaVeri.put(TARLA_LATITUDE, cursor.getString(11));
+            tarlaVeri.put(TARLA_LONGITUDE, cursor.getString(12));
+
+
         }
         cursor.close();
         db.close();
@@ -243,14 +255,14 @@ public class Database extends SQLiteOpenHelper {
         ArrayList<listModel_tarla> tarlalar = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         ///BANA LAZIM OLAN SÜTUNLAR
-        String[] sutunlar = {TARLA_ADI, TARLA_URUN, TARLA_URUN_CESID, TARLA_HASAT_TARIH, TARLA_EKIM_TARIH, TARLA_ID};
+        String[] sutunlar = {TARLA_ADI, TARLA_URUN, TARLA_URUN_CESID, TARLA_HASAT_TARIH, TARLA_EKIM_TARIH, TARLA_ID,TARLA_LATITUDE,TARLA_LONGITUDE};
         Cursor cursor = db.query(TARLA, sutunlar, null, null, null, null, null);
 
         while (cursor.moveToNext()) {
             //cursor 1 = TARla adı cursor 2 =Tarla urun ...
 
             tarlalar.add(new listModel_tarla(cursor.getString(0), cursor.getString(1), cursor.getString(2)
-                    , cursor.getString(3), cursor.getString(4), cursor.getString(5)));
+                    , cursor.getString(3), cursor.getString(4), cursor.getString(5),cursor.getString(6),cursor.getString(7)));
 
 
         }

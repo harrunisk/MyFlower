@@ -63,7 +63,7 @@ Tarla tarla;
     //database'e göndereceğim değişikenler
     String tarlaAdi, tarlaUrun, tarlaUrunCesid, tarlaToprak, tarlaSulama, tarlaYer, tarlaHasatTarih, tarlaEkimTarih;
     Integer tarlaBuyukluk, tarlaVerim;
-
+    Double tarlaLatitude,tarlaLongitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,7 +168,7 @@ Tarla tarla;
                                 tarlaVerim = Integer.parseInt(verim.getText().toString());
                                 tarlaAdi=tarla_name.getText().toString();
                                 Database db = new Database(getApplicationContext());
-                                db.tarlaEkle(tarlaAdi, tarlaBuyukluk, tarlaVerim, tarlaUrun, tarlaUrunCesid, tarlaToprak, tarlaSulama, tarlaYer, tarlaHasatTarih, tarlaEkimTarih);
+                                db.tarlaEkle(tarlaAdi, tarlaBuyukluk, tarlaVerim, tarlaUrun, tarlaUrunCesid, tarlaToprak, tarlaSulama, tarlaYer, tarlaHasatTarih, tarlaEkimTarih,tarlaLatitude,tarlaLongitude);
 
                                // Toast.makeText(getApplicationContext(), "Veritabanına eklendi ama şu an görüntüleyemezsiniz.", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(TarlaEkle.this, Tarla.class);
@@ -374,6 +374,7 @@ Tarla tarla;
                     public void onMapClick(final LatLng latLng) {
 
                         latLng2 = latLng;
+
                         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(dialog2.getContext(), android.R.style.Theme_DeviceDefault_Dialog_Alert);
                         LayoutInflater inflater = context.getLayoutInflater();
                         View dialogView = inflater.inflate(R.layout.alert_dialog, null);
@@ -420,6 +421,8 @@ Tarla tarla;
                         dialog2.dismiss();
                         map.setText(latLng2.toString());
                         tarlaYer = latLng2.toString();
+                        tarlaLatitude=latLng2.latitude;
+                        tarlaLongitude=latLng2.longitude;
 
                         //getFragmentManager().beginTransaction().remove(f).commit();
                         f.onStop();

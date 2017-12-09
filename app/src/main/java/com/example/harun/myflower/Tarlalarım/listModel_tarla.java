@@ -11,7 +11,7 @@ public class listModel_tarla {
     String tvHasat;
     String tvEkim;
     String id;
-    public listModel_tarla(String tarla_adi, String urun, String urunCesid, String tvHasat, String tvEkim,String id) {
+    public listModel_tarla(String tarla_adi, String urun, String urunCesid, String tvHasat, String tvEkim, String id, String string, String cursorString) {
         this.tarla_adi = tarla_adi;
         this.urun = urun;
         this.urunCesid = urunCesid;

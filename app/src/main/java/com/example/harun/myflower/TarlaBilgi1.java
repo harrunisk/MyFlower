@@ -38,13 +38,23 @@ public class TarlaBilgi1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tarla_bilgi_1);
 
+        //veritabanı işlemleri
+        Bundle extra=getIntent().getExtras();
+        String a =extra.getString("iddeger");
+        int id=Integer.parseInt(a);
+        Database db=new Database(getApplicationContext());
+        HashMap<String, String> map =db.idTarlaVeri(id);
+
+
+
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 //        mView = (MapView) findViewById(R.id.mapView);
 
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         android.support.v4.app. FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.mapView, new MapFragment(55.854049,13.661331));
+        fragmentTransaction.replace(R.id.mapView, new MapFragment(Double.parseDouble(map.get("TARLA_LATITUDE")),Double.parseDouble(map.get("TARLA_LONGITUDE"))));
         /**** HACI BURADA GÖNDERDİĞİM LAT LONG KISMINDAN GÖNDERİCEGİMİZ DEĞERLER MAP KISMINDA GÖRÜNCECEK *///
         fragmentTransaction.commit();
 
@@ -95,15 +105,7 @@ public class TarlaBilgi1 extends AppCompatActivity {
         tarlaToprak=(TextView) findViewById(R.id.tarlaToprak);
         tarlaVerim=(TextView) findViewById(R.id.tarlaVerim);
 
-        //veritabanı işlemleri
-        Bundle extra=getIntent().getExtras();
-        String a =extra.getString("iddeger");
-        int id=Integer.parseInt(a);
 
-
-        Database db=new Database(getApplicationContext());
-
-        HashMap<String, String> map =db.idTarlaVeri(id);
 
         tarlaAdi.setText(map.get("TARLA_ADI"));
 
