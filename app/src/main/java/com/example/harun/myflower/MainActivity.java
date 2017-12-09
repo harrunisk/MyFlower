@@ -2,8 +2,10 @@ package com.example.harun.myflower;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -35,10 +37,15 @@ import helpers.MqttHelper;
 public class MainActivity extends AppCompatActivity {
 
     MqttHelper mqttHelper;
-    ChartHelper mChart;
+    ChartHelper mChart,mChart2;
     LineChart chart,chart2;
     TextView username;
-    ChartHelper mChart2;
+
+    ChartHelper mChart3,mChart4;
+    LineChart chart3,chart4;
+
+    ChartHelper mChart5,mChart6;
+    LineChart chart5,chart6;
 
     ListView lv;
     ArrayAdapter adapter;
@@ -55,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     private DrawerLayout mDrawer;
     private ActionBarDrawerToggle toolbar;
+    static int temp=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +71,18 @@ public class MainActivity extends AppCompatActivity {
         chart = (LineChart) findViewById(R.id.chart);
         chart2 = (LineChart) findViewById(R.id.chart);
 
+        chart3=(LineChart) findViewById(R.id.chart2);
+        chart4=(LineChart) findViewById(R.id.chart2);
+
+        chart5=(LineChart) findViewById(R.id.chart3);
+        chart6=(LineChart) findViewById(R.id.chart3);
+
+
         mChart = new ChartHelper(chart);
+        mChart3 = new ChartHelper(chart3);
+        mChart5 = new ChartHelper(chart5);
+
+
 
         mDrawer=(DrawerLayout)findViewById(R.id.drawer);
         toolbar=new ActionBarDrawerToggle(this,mDrawer,R.string.open,R.string.kapa);
@@ -71,7 +90,13 @@ public class MainActivity extends AppCompatActivity {
         toolbar.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         func();
-        startMqtt();
+        if(temp==0)
+        {startMqtt();
+        temp++;}
+        else if (temp!=0){
+
+        }
+
 
 
         final NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
@@ -91,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         username.setText(mail);*/
 
             navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     mDrawer.closeDrawers();
@@ -98,14 +124,19 @@ public class MainActivity extends AppCompatActivity {
                     if(item.getItemId()==R.id.haber){
                         Intent intent = new Intent(MainActivity.this, Haberler.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
                         startActivity(intent);
+                        finish();
+                        
                         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
                     }
                         if(item.getItemId()==R.id.add_tarla) {
                             Intent intent = new Intent(MainActivity.this, Tarla.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
                             startActivity(intent);
+                            finish();
                             overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
                         }
@@ -114,7 +145,9 @@ public class MainActivity extends AppCompatActivity {
                         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                        // intent.putExtra("username",username2);
 
+
                         startActivity(intent);
+                        finish();
                     }
                     return false;
                 }
@@ -218,7 +251,8 @@ func3();
             {
 
                 mChart.addEntry(Float.valueOf(sicaklik_Veri[i].toString()));
-
+                mChart3.addEntry(Float.valueOf(nem_Veri[i].toString()));
+                mChart5.addEntry(Float.valueOf(isik_Veri[i].toString()));
 
             }
 
@@ -277,6 +311,8 @@ func3();
 
 
                 mChart.addEntry(Float.valueOf(sicaklik_Veri[sensorVeriListe.size()-1].toString()));
+            mChart3.addEntry(Float.valueOf(nem_Veri[sensorVeriListe.size()-1].toString()));
+            mChart5.addEntry(Float.valueOf(isik_Veri[sensorVeriListe.size()-1].toString()));
 
 
 
@@ -333,10 +369,14 @@ func3();
             adapter=new ArrayAdapter(this,R.layout.list_item,R.id.list_item_text ,tum_Veri);
             lv.setAdapter(adapter);
             mChart2=new ChartHelper(chart2);
+            mChart4=new ChartHelper(chart4);
+            mChart6=new ChartHelper(chart6);
             for (int i=0;i<sensorVeriListe.size();i++)
             {
 
                 mChart2.addEntry(Float.valueOf(sicaklik_Veri[i].toString()));
+                mChart4.addEntry(Float.valueOf(nem_Veri[i].toString()));
+                mChart6.addEntry(Float.valueOf(isik_Veri[i].toString()));
 
 
             }

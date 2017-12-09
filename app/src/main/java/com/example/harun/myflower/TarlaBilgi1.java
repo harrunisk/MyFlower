@@ -1,8 +1,11 @@
 package com.example.harun.myflower;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +29,7 @@ public class TarlaBilgi1 extends AppCompatActivity {
     MapView tarlaYer;
     String tarlaKoordinat;
     int id;
+    Button sensorSayfa;
 
 
     private MapView mView;
@@ -44,6 +48,18 @@ public class TarlaBilgi1 extends AppCompatActivity {
         /**** HACI BURADA GÖNDERDİĞİM LAT LONG KISMINDAN GÖNDERİCEGİMİZ DEĞERLER MAP KISMINDA GÖRÜNCECEK *///
         fragmentTransaction.commit();
 
+
+        sensorSayfa=(Button) findViewById(R.id.sensorler);
+        sensorSayfa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TarlaBilgi1.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+                startActivity(intent);
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+            }
+        });
 
         //hava durumu resimleri
         gun1Resim=(ImageView) findViewById(R.id.gun1Resim);

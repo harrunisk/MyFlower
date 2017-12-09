@@ -36,6 +36,20 @@
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
+                <Button
+                    android:id="@+id/sensorler"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:background="@android:color/transparent"
+                    android:drawableRight="@drawable/sensor"
+                    android:hint="Sensörler "
+                    android:padding="10dp"
+                    android:textColor="@color/OrangeRed"
+                    android:textColorHint="@color/OrangeRed"
+                    android:textSize="15dp"  />
+
             </LinearLayout>
 
 
@@ -417,25 +431,34 @@
                 android:padding="5dp">
 
 
+
                 <Button
                     android:id="@+id/tarlaDuzenle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/roundedbutton3"
+
                     android:text="Tarla Düzenle"
                     android:textAllCaps="false"
-                    tools:textAllCaps="false" />
+                    tools:textAllCaps="false"
+                    android:background="@android:color/transparent"
+                    android:padding="10dp"
+                    android:textColor="@color/OrangeRed"
+                    android:textColorHint="@color/OrangeRed"/>
 
                 <Button
                     android:id="@+id/tarlaSil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/roundedbutton3"
+
                     android:text="Tarla Sil"
                     android:textAllCaps="false"
                     tools:textAllCaps="false"
+                    android:background="@android:color/transparent"
+                    android:padding="10dp"
+                    android:textColor="@color/OrangeRed"
+                    android:textColorHint="@color/OrangeRed"
 
                     />
             </LinearLayout>
