@@ -46,7 +46,7 @@ public class Tarla extends AppCompatActivity {
     listAdapter_tarla listAdapterTarla;
     listModel_tarla listModelTarla;
     public ListView mlistview;
-
+    String username2;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +56,8 @@ public class Tarla extends AppCompatActivity {
         database = new Database(this);
         mlistview=(ListView)findViewById(R.id.listViewTarla); /// LAYOUT LİSTESİNİ TANIMLADIM
 
-
-        Bundle extra=getIntent().getExtras();
-        final String username2=extra.getString("username");
+        /*Bundle extra=getIntent().getExtras();
+       =extra.getString("username");
 
         /**ŞİMDİ VERİTABANINDAN VERİLERİ ÇEKİP tarlaArrayLİSTESİne eklemem lazım */
 

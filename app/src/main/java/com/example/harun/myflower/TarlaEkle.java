@@ -174,7 +174,7 @@ Tarla tarla;
                                 Intent intent = new Intent(TarlaEkle.this, Tarla.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
-                                finish();
+                               // finish();
                                 overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
                             }
