@@ -58,12 +58,13 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
     public String secilen_item;
     private CardPagerAdapter mCardAdapter;
     private ShadowTransformer mCardShadowTransformer;
-listAdapter_tarla liste;
-Tarla tarla;
+    listAdapter_tarla liste;
+    Tarla tarla;
     //database'e göndereceğim değişikenler
     String tarlaAdi, tarlaUrun, tarlaUrunCesid, tarlaToprak, tarlaSulama, tarlaYer, tarlaHasatTarih, tarlaEkimTarih;
     Integer tarlaBuyukluk, tarlaVerim;
-    Double tarlaLatitude,tarlaLongitude;
+    Double tarlaLatitude, tarlaLongitude;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +92,7 @@ Tarla tarla;
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog alertDialog= new AlertDialog.Builder(TarlaEkle.this).create();
+                AlertDialog alertDialog = new AlertDialog.Builder(TarlaEkle.this).create();
                 alertDialog.setTitle("İptal Etmek İstiyor musunuz?");
                 alertDialog.setMessage("İptal Ederseniz Girmiş Olduğunuz Veriler Kaybolacak");
 
@@ -120,9 +121,9 @@ Tarla tarla;
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.action_done:
-                       // MenuItem settingsItem = menuItem.findItem(R.id.action_settings);
+                        // MenuItem settingsItem = menuItem.findItem(R.id.action_settings);
 
-                      //  menuItem.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.add));
+                        //  menuItem.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.add));
                         /***BOS OLUP OLMADIKLARINN KONTROLU **/
 
                         tarlaUrun = mCardAdapter.urun;
@@ -146,17 +147,15 @@ Tarla tarla;
 
                         } else if (TextUtils.isEmpty(tarlaUrunCesid)) {
                             Toast.makeText(getApplicationContext(), "Ürün Çeşidi Seçiniz ", Toast.LENGTH_SHORT).show();
-                        }
-                        else if (TextUtils.isEmpty(tarlaToprak)) {
+                        } else if (TextUtils.isEmpty(tarlaToprak)) {
                             Toast.makeText(getApplicationContext(), "ToprakTipi Seçiniz ", Toast.LENGTH_SHORT).show();
-                        }else if (TextUtils.isEmpty(tarlaSulama)) {
+                        } else if (TextUtils.isEmpty(tarlaSulama)) {
                             Toast.makeText(getApplicationContext(), "Sulama Tipi Seçiniz ", Toast.LENGTH_SHORT).show();
-                        }  else if (TextUtils.isEmpty(tarlaYer)) {
+                        } else if (TextUtils.isEmpty(tarlaYer)) {
                             map.setError("Tarla Yeri Seçiniz");
-                        }
-                        else if (TextUtils.isEmpty(tarlaHasatTarih)) {
+                        } else if (TextUtils.isEmpty(tarlaHasatTarih)) {
                             hasat_tarih.setError("Hasat Tarihi Seçiniz");
-                        }else if (TextUtils.isEmpty(tarlaEkimTarih)) {
+                        } else if (TextUtils.isEmpty(tarlaEkimTarih)) {
                             ekim_tarih.setError("Ekim Tarihi Seçiniz");
                         }
 
@@ -166,20 +165,19 @@ Tarla tarla;
 
                                 tarlaBuyukluk = Integer.parseInt(tarla_buyuklugu.getText().toString());
                                 tarlaVerim = Integer.parseInt(verim.getText().toString());
-                                tarlaAdi=tarla_name.getText().toString();
+                                tarlaAdi = tarla_name.getText().toString();
                                 Database db = new Database(getApplicationContext());
-                                db.tarlaEkle(tarlaAdi, tarlaBuyukluk, tarlaVerim, tarlaUrun, tarlaUrunCesid, tarlaToprak, tarlaSulama, tarlaYer, tarlaHasatTarih, tarlaEkimTarih,tarlaLatitude,tarlaLongitude);
+                                db.tarlaEkle(tarlaAdi, tarlaBuyukluk, tarlaVerim, tarlaUrun, tarlaUrunCesid, tarlaToprak, tarlaSulama, tarlaYer, tarlaHasatTarih, tarlaEkimTarih, tarlaLatitude, tarlaLongitude);
 
-                               // Toast.makeText(getApplicationContext(), "Veritabanına eklendi ama şu an görüntüleyemezsiniz.", Toast.LENGTH_LONG).show();
+                                // Toast.makeText(getApplicationContext(), "Veritabanına eklendi ama şu an görüntüleyemezsiniz.", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(TarlaEkle.this, Tarla.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                                 finish();
                                 overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
-                            }
-                            catch (Exception hata){
-                                Toast.makeText(getApplicationContext(), "Tüm alanları eksiksiz doldurun : "+hata, Toast.LENGTH_LONG).show();
+                            } catch (Exception hata) {
+                                Toast.makeText(getApplicationContext(), "Tüm alanları eksiksiz doldurun : " + hata, Toast.LENGTH_LONG).show();
                             }
 
 
@@ -229,8 +227,6 @@ Tarla tarla;
         mCardShadowTransformer.enableScaling(true);
 
 
-
-
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -243,7 +239,7 @@ Tarla tarla;
                 if (!CheckGooglePlayServices()) {
 
                     finish();
-                } else
+                } else if (checkLocationPermission())
 
                     createMapView(TarlaEkle.this);
 
@@ -373,6 +369,11 @@ Tarla tarla;
                     @Override
                     public void onMapClick(final LatLng latLng) {
 
+
+                        double a = latLng.latitude;
+                        double b = latLng.longitude;
+
+
                         latLng2 = latLng;
 
                         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(dialog2.getContext(), android.R.style.Theme_DeviceDefault_Dialog_Alert);
@@ -421,8 +422,8 @@ Tarla tarla;
                         dialog2.dismiss();
                         map.setText(latLng2.toString());
                         tarlaYer = latLng2.toString();
-                        tarlaLatitude=latLng2.latitude;
-                        tarlaLongitude=latLng2.longitude;
+                        tarlaLatitude = latLng2.latitude;
+                        tarlaLongitude = latLng2.longitude;
 
                         //getFragmentManager().beginTransaction().remove(f).commit();
                         f.onStop();

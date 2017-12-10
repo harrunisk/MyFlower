@@ -15,6 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusable="true"
+
             android:focusableInTouchMode="true"
             android:orientation="vertical"
             android:padding="15dp">
@@ -48,7 +49,7 @@
                     android:padding="10dp"
                     android:textColor="@color/OrangeRed"
                     android:textColorHint="@color/OrangeRed"
-                    android:textSize="15dp"  />
+                    android:textSize="15dp" />
 
             </LinearLayout>
 
@@ -62,24 +63,21 @@
 
                 <ImageView
                     android:id="@+id/gun1Resim"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal" />
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1" />
 
                 <ImageView
                     android:id="@+id/gun2Resim"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal" />
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1" />
 
                 <ImageView
                     android:id="@+id/gun3Resim"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal" />
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <LinearLayout
@@ -94,7 +92,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
+                    android:text="Sıcaklık"
                     android:textAlignment="center" />
 
                 <TextView
@@ -102,7 +100,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
+                    android:text="Nem"
                     android:textAlignment="center" />
 
                 <TextView
@@ -110,7 +108,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
+                    android:text="Rüzgar Hızı"
                     android:textAlignment="center" />
             </LinearLayout>
 
@@ -126,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
+                    android:text="Deger"
                     android:textAlignment="center" />
 
                 <TextView
@@ -134,7 +132,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
+                    android:text="deger"
+                    android:layout_marginRight="3dp"
                     android:textAlignment="center" />
 
                 <TextView
@@ -142,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TextView"
+                    android:text="deger"
                     android:textAlignment="center" />
             </LinearLayout>
 
@@ -158,10 +157,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Yağış İhtimali"
+                    android:text="Genel Bilgiler"
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -289,10 +289,10 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/mapView"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginTop="11dp"
-                android:id="@+id/mapView"
                 android:orientation="horizontal"
                 android:padding="5dp">
 
@@ -431,20 +431,19 @@
                 android:padding="5dp">
 
 
-
                 <Button
                     android:id="@+id/tarlaDuzenle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
 
-                    android:text="Tarla Düzenle"
-                    android:textAllCaps="false"
-                    tools:textAllCaps="false"
                     android:background="@android:color/transparent"
                     android:padding="10dp"
+                    android:text="Tarla Düzenle"
+                    android:textAllCaps="false"
                     android:textColor="@color/OrangeRed"
-                    android:textColorHint="@color/OrangeRed"/>
+                    android:textColorHint="@color/OrangeRed"
+                    tools:textAllCaps="false" />
 
                 <Button
                     android:id="@+id/tarlaSil"
@@ -452,13 +451,13 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
 
-                    android:text="Tarla Sil"
-                    android:textAllCaps="false"
-                    tools:textAllCaps="false"
                     android:background="@android:color/transparent"
                     android:padding="10dp"
+                    android:text="Tarla Sil"
+                    android:textAllCaps="false"
                     android:textColor="@color/OrangeRed"
                     android:textColorHint="@color/OrangeRed"
+                    tools:textAllCaps="false"
 
                     />
             </LinearLayout>
