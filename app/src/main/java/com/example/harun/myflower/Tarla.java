@@ -47,6 +47,7 @@ public class Tarla extends AppCompatActivity {
     listModel_tarla listModelTarla;
     public ListView mlistview;
     String username2;
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,16 +55,16 @@ public class Tarla extends AppCompatActivity {
         setContentView(R.layout.activity_tarla);
 
         database = new Database(this);
-        mlistview=(ListView)findViewById(R.id.listViewTarla); /// LAYOUT LİSTESİNİ TANIMLADIM
+        mlistview = (ListView) findViewById(R.id.listViewTarla); /// LAYOUT LİSTESİNİ TANIMLADIM
 
         /*Bundle extra=getIntent().getExtras();
        =extra.getString("username");
 
         /**ŞİMDİ VERİTABANINDAN VERİLERİ ÇEKİP tarlaArrayLİSTESİne eklemem lazım */
 
-        tarlaArrayList=database.tarlaListele();
+        tarlaArrayList = database.tarlaListele();
 
-        listAdapterTarla=new listAdapter_tarla(tarlaArrayList,this); // ADAPTERE LİSTEMİ GÖNDERİYORUM
+        listAdapterTarla = new listAdapter_tarla(tarlaArrayList, this); // ADAPTERE LİSTEMİ GÖNDERİYORUM
         mlistview.setAdapter(listAdapterTarla); //ADAPTERİDE ONAYLADIM
         listAdapterTarla.notifyDataSetChanged();
 
@@ -72,14 +73,14 @@ public class Tarla extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
 
-                String tarlaadi=tarlaArrayList.get(i).getTarla_adi();
-                String tarlaurun=tarlaArrayList.get(i).getUrun();
-                String cesit=tarlaArrayList.get(i).getUrunCesid();
-                String hasat=tarlaArrayList.get(i).getTvHasat();
-                String ekim=tarlaArrayList.get(i).getTvEkim();
-                String id=tarlaArrayList.get(i).getId();
+                String tarlaadi = tarlaArrayList.get(i).getTarla_adi();
+                String tarlaurun = tarlaArrayList.get(i).getUrun();
+                String cesit = tarlaArrayList.get(i).getUrunCesid();
+                String hasat = tarlaArrayList.get(i).getTvHasat();
+                String ekim = tarlaArrayList.get(i).getTvEkim();
+                String id = tarlaArrayList.get(i).getId();
 
-                Toast.makeText(getApplicationContext(),"AL BU DEĞERLERİ TEPE TEPE KULLAN REİS "+"\nTarla ADi :" + tarlaadi
+                Toast.makeText(getApplicationContext(), "AL BU DEĞERLERİ TEPE TEPE KULLAN REİS " + "\nTarla ADi :" + tarlaadi
                                 + "\nürün  " + tarlaurun
                                 + "\ncesit  " + cesit
                                 + "\nhasat  " + hasat
@@ -89,11 +90,10 @@ public class Tarla extends AppCompatActivity {
 
                 Intent intent = new Intent(Tarla.this, TarlaBilgi1.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("iddeger",id);
+                intent.putExtra("iddeger", id);
                 startActivity(intent);
                 overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-               // finish();
-
+                // finish();
 
 
             }
@@ -109,38 +109,15 @@ public class Tarla extends AppCompatActivity {
         hide_fab_2 = AnimationUtils.loadAnimation(getApplication(), R.anim.fab3_hide);
 
 
-
-
-     /*   final ArrayList<String> urunListe = new ArrayList<String>();
-
-        urunListe.add("Ürün");
-        urunListe.add("Arbosona");
-        urunListe.add("Çeşit1");
-        urunListe.add("Çeşit2");*/
-
-
-     /*   lv=(ListView)findViewById(R.id.listViewTarla);
-        adapter = new ArrayAdapter(this, R.layout.list_item_tarla,R.id.list_item_text_tarla,urunListe );
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(getApplicationContext(),TarlaBilgi1.class);
-                //intent.putExtra("id",(int)id_Veri[position]);
-                startActivity(intent);
-            }
-        });*/
-
-
-       // rootLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
-        mDrawer=(DrawerLayout)findViewById(R.id.drawer);
-        toolbar=new ActionBarDrawerToggle(this,mDrawer,R.string.open,R.string.kapa);
+        // rootLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer);
+        toolbar = new ActionBarDrawerToggle(this, mDrawer, R.string.open, R.string.kapa);
         mDrawer.addDrawerListener(toolbar);
         toolbar.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
-        username=(TextView)navigationView.getHeaderView(0).findViewById(R.id.username);
+        username = (TextView) navigationView.getHeaderView(0).findViewById(R.id.username);
 
         getSupportActionBar().setTitle("Tarlalarım");
 
@@ -172,7 +149,7 @@ public class Tarla extends AppCompatActivity {
                 Toast.makeText(getApplication(), "TARLA EKLE ", Toast.LENGTH_SHORT).show();
 
 
-                Intent i =new Intent(Tarla.this,TarlaEkle.class);
+                Intent i = new Intent(Tarla.this, TarlaEkle.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
                 overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
@@ -188,14 +165,13 @@ public class Tarla extends AppCompatActivity {
         });
 
 
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-            mDrawer.closeDrawers();
+                mDrawer.closeDrawers();
 
-                if(item.getItemId()==R.id.haber){
+                if (item.getItemId() == R.id.haber) {
                     Intent intent = new Intent(Tarla.this, Haberler.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     //intent.putExtra("username",username2);
@@ -205,18 +181,18 @@ public class Tarla extends AppCompatActivity {
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
                 }
-                if(item.getItemId()==R.id.Anasayfa){
+                if (item.getItemId() == R.id.Anasayfa) {
                     Intent intent = new Intent(Tarla.this, AnasayfaActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                   // intent.putExtra("username",username2);
+                    // intent.putExtra("username",username2);
                     finish();
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                     startActivity(intent);
                 }
-                if(item.getItemId()==R.id.add_tarla) {
+                if (item.getItemId() == R.id.add_tarla) {
                     Intent intent = new Intent(Tarla.this, TarlaEkle.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                   // intent.putExtra("username",username2);
+                    // intent.putExtra("username",username2);
 
                     startActivity(intent);
                     finish();
@@ -224,12 +200,21 @@ public class Tarla extends AppCompatActivity {
 
                 }
 
-                if(item.getItemId()==R.id.tarla) {
+                if (item.getItemId() == R.id.tarla) {
                     Intent intent = new Intent(Tarla.this, Tarla.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                   // intent.putExtra("username",username2);
+                    // intent.putExtra("username",username2);
 
                     startActivity(intent);
+                    overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
+                }
+                if (item.getItemId() == R.id.mahsül) {
+                    Intent intent = new Intent(Tarla.this, UrunArama.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    // intent.putExtra("username", username2);
+                    startActivity(intent);
+                    finish();
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
                 }
@@ -238,11 +223,11 @@ public class Tarla extends AppCompatActivity {
         });
 
 
-
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(toolbar.onOptionsItemSelected(item)){
+        if (toolbar.onOptionsItemSelected(item)) {
 
 
             return true;
@@ -251,6 +236,7 @@ public class Tarla extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
+
     private void expandFAB() {
 
         //Floating Action Button 1
@@ -308,5 +294,5 @@ public class Tarla extends AppCompatActivity {
         fab2.setClickable(false);
     }
 
-    }
+}
 

@@ -66,6 +66,16 @@ public class AnasayfaActivity extends AppCompatActivity {
         String mail = preferences.getString("email", "");
         username.setText(mail);*/
 
+      urun.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+
+              Intent intent = new Intent(AnasayfaActivity.this, UrunArama.class);
+              intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+              startActivity(intent);
+
+          }
+      });
         haber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +100,8 @@ public class AnasayfaActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 mDrawer.closeDrawers();//DRAVER LAYOUT KISMI GERİ GELİNCE KAPANMIYORDU ONUN İÇİN EKLEDİM
 
+
+                ///// ANASAYFAYDA FİNİSH KULLANMA KULLANICI GERİ DEDİĞİNDE ANASAYFA ACILSIN **///
                 if (item.getItemId() == R.id.haber) {
                     Intent intent = new Intent(AnasayfaActivity.this, Haberler.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -115,6 +127,15 @@ public class AnasayfaActivity extends AppCompatActivity {
                     Intent intent = new Intent(AnasayfaActivity.this, Tarla.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                    // intent.putExtra("username", username2);
+
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
+                }
+                if (item.getItemId()==R.id.mahsül){
+                    Intent intent = new Intent(AnasayfaActivity.this, UrunArama.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    // intent.putExtra("username", username2);
 
                     startActivity(intent);
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);

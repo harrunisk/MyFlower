@@ -2,11 +2,7 @@ package com.example.harun.myflower;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -55,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
     String nem_Veri[];
     String isik_Veri[];
     String tum_Veri[];
-    int k = 88;
     int id_Veri[];
     String tarih_Veri[];
     SharedPreferences preferences;//preferences referansı
@@ -84,11 +79,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        mDrawer=(DrawerLayout)findViewById(R.id.drawer);
-        toolbar=new ActionBarDrawerToggle(this,mDrawer,R.string.open,R.string.kapa);
-        mDrawer.addDrawerListener(toolbar);
-        toolbar.syncState();
+        //mDrawer=(DrawerLayout)findViewById(R.id.drawer);
+        ///toolbar=new ActionBarDrawerToggle(this,mDrawer,R.string.open,R.string.kapa);
+       // mDrawer.addDrawerListener(toolbar);
+        //toolbar.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Sensör detayları");
         func();
         if(temp==0)
         {startMqtt();
@@ -98,9 +94,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
-        final NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
-        username=(TextView)navigationView.getHeaderView(0).findViewById(R.id.username);
+       // final NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+       // username=(TextView)navigationView.getHeaderView(0).findViewById(R.id.username);
 
        // Bundle extra=getIntent().getExtras();
         //final String username2=extra.getString("username");
@@ -115,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         String mail = preferences.getString("email", "");
         username.setText(mail);*/
 
-            navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+          /*  navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -152,20 +147,23 @@ public class MainActivity extends AppCompatActivity {
                     return false;
                 }
             });
-
+*/
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(toolbar.onOptionsItemSelected(item)){
-
-
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                return true;
         }
-
         return super.onOptionsItemSelected(item);
-
     }
+
+
 
     private void startMqtt() {
 
