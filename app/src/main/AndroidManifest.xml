@@ -11,9 +11,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,8 +18,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
         <activity
             android:name=".Login"
             android:theme="@style/AppTheme2">
@@ -32,9 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AnasayfaActivity"/>
-        <activity android:name=".TarlaBilgi1"/>
-
+        <activity android:name=".AnasayfaActivity" />
+        <activity android:name=".TarlaBilgi1" />
         <activity android:name=".MainActivity">
 
             <!--
@@ -56,9 +50,9 @@
         <activity android:name=".Haberler" />
         <activity android:name=".DetailsHaber" />
         <activity android:name=".Tarla" />
-
-
-        <activity android:name=".TarlaEkle" android:theme="@style/AppTheme2" ></activity>
+        <activity
+            android:name=".TarlaEkle"
+            android:theme="@style/AppTheme2" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -67,6 +61,12 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-</application>
+        <activity
+            android:name=".UrunArama"
+            android:theme="@style/AppTheme2">
+
+        </activity>
+
+    </application>
 
 </manifest>

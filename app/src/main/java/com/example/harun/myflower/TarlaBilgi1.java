@@ -50,7 +50,7 @@ public class TarlaBilgi1 extends AppCompatActivity {
     int sicaklik;
     double ruzgarhizi;
     int nemdegeri;
-    String name, havanasil2, aciklama,ulke;
+    String name, havanasil2, aciklama, ulke;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,8 +136,8 @@ public class TarlaBilgi1 extends AppCompatActivity {
         tarlaUrunCesid.setText(map.get("TARLA_URUN_CESID"));
         tarlaToprak.setText(map.get("TARLA_TOPRAK"));
         tarlaSulama.setText(map.get("TARLA_SULAMA"));
-        tarlaHasatTarih.setText(map.get("HASAT_TARIH"));
-        tarlaEkimTarih.setText(map.get("EKIM_TARIH"));
+        tarlaHasatTarih.setText(map.get("TARLA_HASAT_TARIH"));
+        tarlaEkimTarih.setText(map.get("TARLA_EKIM_TARIH"));
         tarlaKoordinat = map.get("TARLA_YER");
         tarlaVerim.setText(map.get("TARLA_VERIM").toString());
         tarlaBuyukluk.setText(map.get("TARLA_BUYUKLUK").toString());
@@ -209,8 +209,8 @@ public class TarlaBilgi1 extends AppCompatActivity {
                         nemdegeri = main.getInt("humidity");
 
 
-                        JSONObject ulke2=jsonObject.getJSONObject("sys");
-                        ulke=ulke2.getString("country");
+                        JSONObject ulke2 = jsonObject.getJSONObject("sys");
+                        ulke = ulke2.getString("country");
 
                         JSONObject ruzgar = jsonObject.getJSONObject("wind");
 
@@ -256,11 +256,13 @@ public class TarlaBilgi1 extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
 
+            geticon(iconkodu);
+
             /**** ICONUDA INTERNETTEN CEKİYOR */
-            String url = "http://openweathermap.org/img/w/" + iconkodu + ".png";
+           /* String url = "http://openweathermap.org/img/w/" + iconkodu + ".png";
             Picasso.with(getApplicationContext()).load(url).fit().into(gun1Resim);
             Picasso.with(getApplicationContext()).load(url).fit().into(gun2Resim);
-            Picasso.with(getApplicationContext()).load(url).fit().into(gun3Resim);
+            Picasso.with(getApplicationContext()).load(url).fit().into(gun3Resim);*/
 
             /*** APININ LANG KISMINI TR YAPAMADIGIM ICIN TR YE CEVIRIYORUM :DDD*/
 
@@ -303,10 +305,112 @@ public class TarlaBilgi1 extends AppCompatActivity {
             gun2.setText("" + nemdegeri + " %");
             gun3.setText("" + ruzgarhizi + " km/s");
             gun1Yagis.setText(ulke);
-           // gun2Yagis.setText(havanasil2);
+            // gun2Yagis.setText(havanasil2);
             gun2Yagis.setText(name);
 
         }
 
     }
+
+    public void geticon(String iconkodu) {
+
+        switch (iconkodu) {
+            case "01d":
+                Picasso.with(getApplicationContext()).load(R.drawable.a).fit().into(gun3Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.a).fit().into(gun2Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.a).fit().into(gun1Resim);
+                break;
+            case "01n":
+                Picasso.with(getApplicationContext()).load(R.drawable.an).fit().into(gun3Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.an).fit().into(gun2Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.an).fit().into(gun1Resim);
+                break;
+            case "02d":
+                Picasso.with(getApplicationContext()).load(R.drawable.b).fit().into(gun3Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.b).fit().into(gun2Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.b).fit().into(gun1Resim);
+                break;
+            case "02n":
+                Picasso.with(getApplicationContext()).load(R.drawable.bn).fit().into(gun3Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.bn).fit().into(gun2Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.bn).fit().into(gun1Resim);
+                break;
+            case "03d":
+                Picasso.with(getApplicationContext()).load(R.drawable.c).fit().into(gun3Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.c).fit().into(gun2Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.c).fit().into(gun1Resim);
+                break;
+            case "03n":
+                Picasso.with(getApplicationContext()).load(R.drawable.cn).fit().into(gun3Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.cn).fit().into(gun2Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.cn).fit().into(gun1Resim);
+                break;
+            case "04d":
+                Picasso.with(getApplicationContext()).load(R.drawable.c).fit().into(gun3Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.c).fit().into(gun2Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.c).fit().into(gun1Resim);
+                break;
+            case "04n":
+                Picasso.with(getApplicationContext()).load(R.drawable.dn).fit().into(gun3Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.dn).fit().into(gun2Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.dn).fit().into(gun1Resim);
+                break;
+            case "09d":
+                Picasso.with(getApplicationContext()).load(R.drawable.e).fit().into(gun3Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.e).fit().into(gun2Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.e).fit().into(gun1Resim);
+                break;
+            case "09n":
+                Picasso.with(getApplicationContext()).load(R.drawable.en).fit().into(gun3Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.en).fit().into(gun2Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.en).fit().into(gun1Resim);
+                break;
+            case "10n":
+                Picasso.with(getApplicationContext()).load(R.drawable.f).fit().into(gun3Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.f).fit().into(gun2Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.f).fit().into(gun1Resim);
+                break;
+            case "10d":
+                Picasso.with(getApplicationContext()).load(R.drawable.fn).fit().into(gun3Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.fn).fit().into(gun2Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.fn).fit().into(gun1Resim);
+                break;
+            case "11d":
+                Picasso.with(getApplicationContext()).load(R.drawable.g).fit().into(gun3Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.g).fit().into(gun2Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.g).fit().into(gun1Resim);
+                break;
+            case "11n":
+                Picasso.with(getApplicationContext()).load(R.drawable.gn).fit().into(gun3Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.gn).fit().into(gun2Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.gn).fit().into(gun1Resim);
+                break;
+            case "13d":
+                Picasso.with(getApplicationContext()).load(R.drawable.h).fit().into(gun3Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.h).fit().into(gun2Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.h).fit().into(gun1Resim);
+                break;
+            case "13n":
+                Picasso.with(getApplicationContext()).load(R.drawable.hn).fit().into(gun3Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.hn).fit().into(gun2Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.hn).fit().into(gun1Resim);
+                break;
+            case "50d":
+                Picasso.with(getApplicationContext()).load(R.drawable.r).fit().into(gun3Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.r).fit().into(gun2Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.r).fit().into(gun1Resim);
+                break;
+            case "50n":
+                Picasso.with(getApplicationContext()).load(R.drawable.rn).fit().into(gun3Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.rn).fit().into(gun2Resim);
+                Picasso.with(getApplicationContext()).load(R.drawable.rn).fit().into(gun1Resim);
+                break;
+            default:   Picasso.with(getApplicationContext()).load(R.drawable.default2).fit().into(gun3Resim);
+              Picasso.with(getApplicationContext()).load(R.drawable.default2).fit().into(gun2Resim);
+              Picasso.with(getApplicationContext()).load(R.drawable.default2).fit().into(gun1Resim);
+        }
+
+
+    }
+
 }

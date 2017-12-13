@@ -99,7 +99,7 @@ public class Haberler extends AppCompatActivity {
                     Intent intent = new Intent(Haberler.this, AnasayfaActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.putExtra("username",mail);
-
+finish();
                     startActivity(intent);
                 }
 
@@ -118,11 +118,21 @@ public class Haberler extends AppCompatActivity {
                     Intent intent = new Intent(Haberler.this, Tarla.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.putExtra("username",mail);
-
                     startActivity(intent);
+                    finish();
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
                 }
+                if (item.getItemId() == R.id.mahsül) {
+                    Intent intent = new Intent(Haberler.this, UrunArama.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    // intent.putExtra("username", username2);
+                    startActivity(intent);
+                    finish();
+                    overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
+                }
+
 
                 return false;
             }

@@ -42,14 +42,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-
                     android:background="@android:color/transparent"
-                    android:drawableRight="@drawable/sensor"
-                    android:hint="Sensörler "
+                    android:drawableRight="@drawable/sensor2"
                     android:padding="10dp"
-                    android:textColor="@color/OrangeRed"
-                    android:textColorHint="@color/OrangeRed"
-                    android:textSize="15dp" />
+                    android:text="Sensörler"
+                    android:textSize="20dp"
+                    android:textStyle="italic" />
 
             </LinearLayout>
 
@@ -63,20 +61,20 @@
 
                 <ImageView
                     android:id="@+id/gun1Resim"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_weight="1" />
 
                 <ImageView
                     android:id="@+id/gun2Resim"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_weight="1" />
 
                 <ImageView
                     android:id="@+id/gun3Resim"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
                     android:layout_weight="1" />
             </LinearLayout>
 
@@ -131,9 +129,9 @@
                     android:id="@+id/gun2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
                     android:layout_weight="1"
                     android:text="deger"
-                    android:layout_marginRight="3dp"
                     android:textAlignment="center" />
 
                 <TextView
