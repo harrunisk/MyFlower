@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background2">
+        android:background="@drawable/backround">
 
 
         <Button
@@ -24,8 +24,8 @@
             android:layout_marginTop="37dp"
             android:background="@drawable/transparan_siyah"
             android:text="Tarlalarım"
-            android:textColor="#FFFFFF"
             android:textAllCaps="false"
+            android:textColor="#FFFFFF"
             android:textSize="30sp"
             tools:textAllCaps="false" />
 
@@ -37,9 +37,9 @@
             android:layout_below="@+id/tarla"
             android:layout_marginTop="17dp"
             android:background="@drawable/roundedbutton"
-            android:textColor="#FFFFFF"
             android:text="Ürün Fiyatları"
             android:textAllCaps="false"
+            android:textColor="#FFFFFF"
             android:textSize="30sp"
             tools:textAllCaps="false"
 
@@ -53,8 +53,8 @@
             android:layout_alignTop="@+id/fiyat"
             android:background="@drawable/roundedbutton"
             android:text="Ürün Ara"
-            android:textColor="#FFFFFF"
             android:textAllCaps="false"
+            android:textColor="#FFFFFF"
             android:textSize="30sp"
             tools:textAllCaps="false" />
 
@@ -68,8 +68,8 @@
             android:background="@drawable/roundedbutton"
             android:text="Haberler"
             android:textAllCaps="false"
-            android:textSize="30sp"
             android:textColor="#FFFFFF"
+            android:textSize="30sp"
             tools:textAllCaps="false" />
 
         <Button
@@ -80,9 +80,9 @@
             android:layout_below="@+id/urunAra"
             android:layout_marginTop="22dp"
             android:background="@drawable/roundedbutton"
-            android:textColor="#FFFFFF"
             android:text="Ayarlar"
             android:textAllCaps="false"
+            android:textColor="#FFFFFF"
             android:textSize="30sp"
             tools:textAllCaps="false" />
 
