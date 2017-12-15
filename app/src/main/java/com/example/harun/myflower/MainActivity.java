@@ -261,7 +261,7 @@ func3();
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     Intent intent=new Intent(getApplicationContext(),SensorDetayActivity.class);
-                    intent.putExtra("id",(int)id_Veri[position]);
+                    intent.putExtra("id", id_Veri[position]);
                     startActivity(intent);
 
                 }
@@ -322,7 +322,7 @@ func3();
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     Intent intent=new Intent(getApplicationContext(),SensorDetayActivity.class);
-                    intent.putExtra("id",(int)id_Veri[position]);
+                    intent.putExtra("id", id_Veri[position]);
                     startActivity(intent);
 
                 }
@@ -386,7 +386,7 @@ func3();
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     Intent intent=new Intent(getApplicationContext(),SensorDetayActivity.class);
-                    intent.putExtra("id",(int)id_Veri[position]);
+                    intent.putExtra("id", id_Veri[position]);
                     startActivity(intent);
 
                 }

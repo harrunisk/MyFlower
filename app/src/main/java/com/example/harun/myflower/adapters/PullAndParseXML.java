@@ -177,21 +177,6 @@ public class PullAndParseXML {
 
     }
 
-
-     /* String a="<div>";
-                                if(description.trim().startsWith(a)) {
-                                    System.out.println("BURASI " + description + "uzunluk " + description.length());
-                                }
-                              /*  if (postItem.getDescription().startsWith("<div>") || postItem.getDescription().endsWith("</div>")) {
-                                   String a = description.substring(1, description.length() - 1);
-                                   // description.replace("<div>", "");
-                                   // description.replace("</div>", "");
-                                    System.out.println("BURASI " + description+" burası2 "+ a );
-                                }
-*/
-    // postItem.setImageUrl("http://webrazzi.com/wp-content/uploads/2016/06/Hover-kamera-318x175.png");
-
-
     public String removeDivTags(String inStr) {
 
         int index = 0;

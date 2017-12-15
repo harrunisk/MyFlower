@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/primary_darker"
+    android:background="@color/WhiteSmoke"
     android:fitsSystemWindows="false">
 
     <LinearLayout
@@ -26,13 +26,13 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginRight="30dp"
-                android:background="@drawable/plant"
+                android:background="@drawable/wheat2"
                 android:gravity="center" />
 
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@drawable/plant" />
+                android:background="@drawable/tractor2" />
 
 
         </LinearLayout>
@@ -44,8 +44,8 @@
             android:fontFamily="serif"
             android:text="@string/kayit"
             android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textColorHighlight="@color/white"
+            android:textColor="@color/DarkSlateGray"
+            android:textColorHighlight="@color/DarkSlateGray"
             android:textSize="30dp" />
 
         <EditText
@@ -55,8 +55,8 @@
             android:hint="Ad Soyad"
             android:inputType="textPersonName"
             android:paddingLeft="5dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/DarkSlateGray"
+            android:textColorHint="@color/DarkSlateGray"
             android:textStyle="italic" />
 
         <EditText
@@ -65,8 +65,8 @@
             android:layout_height="wrap_content"
             android:hint="Kullanıcı Adı"
             android:paddingLeft="5dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/DarkSlateGray"
+            android:textColorHint="@color/DarkSlateGray"
             android:textStyle="italic" />
 
         <EditText
@@ -76,8 +76,8 @@
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:paddingLeft="5dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/DarkSlateGray"
+            android:textColorHint="@color/DarkSlateGray"
             android:textStyle="italic" />
 
         <EditText
@@ -87,8 +87,8 @@
             android:hint="Parola"
             android:inputType="textVisiblePassword"
             android:paddingLeft="5dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/DarkSlateGray"
+            android:textColorHint="@color/DarkSlateGray"
             android:textStyle="italic" />
 
         <EditText
@@ -98,8 +98,8 @@
             android:hint="Parola Tekrar"
             android:inputType="textPassword"
             android:paddingLeft="5dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/DarkSlateGray"
+            android:textColorHint="@color/DarkSlateGray"
             android:textStyle="italic" />
 
         <Button
@@ -108,10 +108,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:layout_marginTop="24dp"
-            android:background="@drawable/edittext2"
+            android:background="@drawable/buttonback"
             android:padding="12dp"
             android:text="Hesap Oluştur"
-            android:textColor="@color/primary_dark"
+            android:textColor="@color/SeaGreen"
             android:textStyle="bold" />
 
         <TextView
@@ -121,7 +121,7 @@
             android:layout_marginBottom="24dp"
             android:gravity="center"
             android:text="Zaten Üyemisiniz? Giriş Yapın "
-            android:textColor="@color/white"
+            android:textColor="@color/SeaGreen"
             android:textSize="16dip"
             android:textStyle="italic" />
 

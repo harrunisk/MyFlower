@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_darker"
+    android:background="@color/DarkSlateGray"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="18dp"
@@ -27,20 +27,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="50dp"
         android:gravity="center">
 
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginRight="30dp"
-            android:background="@drawable/plant"
+            android:background="@drawable/plant2"
             android:gravity="center" />
 
         <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@drawable/plant" />
+            android:background="@drawable/plant3" />
 
 
     </LinearLayout>
@@ -49,9 +49,10 @@
         android:id="@+id/input_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/edittext2"
-        android:drawableRight="@drawable/compose"
+        android:background="@drawable/edittext3"
+        android:drawableRight="@drawable/keyhole"
         android:hint="Kullanıcı Adı"
+        android:paddingRight="5dp"
         android:lines="2"
         android:paddingLeft="5dp"
         android:textColor="#000"
@@ -64,13 +65,14 @@
     <EditText
         android:id="@+id/input_password"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="15dp"
-        android:background="@drawable/edittext2"
-        android:drawableRight="@drawable/compose"
+        android:background="@drawable/edittext3"
+        android:drawableRight="@drawable/padlock"
         android:hint="Parola"
         android:lines="2"
         android:paddingLeft="5dp"
+        android:paddingRight="5dp"
         android:textColor="#000"
         android:textColorHint="#333"
         android:textStyle="italic" />
@@ -83,10 +85,10 @@
         android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:background="@drawable/edittext2"
-        android:drawableRight="@drawable/senta"
+        android:background="@drawable/edittext3"
+        android:drawableRight="@drawable/ic_action_name"
         android:text="Giriş Yap"
-        android:textColor="@color/primary_dark"
+        android:textColor="@color/SeaGreen"
         android:textStyle="bold" />
 
     <TextView

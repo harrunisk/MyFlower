@@ -8,7 +8,7 @@ public class KullaniciModel {
 
     public String email,username,password,isim;
 
-    public KullaniciModel(){};
+    public KullaniciModel(){}
 
     public KullaniciModel(String email, String username, String password, String isim) {
         this.email = email;
@@ -44,9 +44,6 @@ public class KullaniciModel {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    ;
-
 
 
 }

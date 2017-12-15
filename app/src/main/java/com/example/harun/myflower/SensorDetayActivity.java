@@ -51,7 +51,7 @@ public class SensorDetayActivity extends Activity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SensorVeriDuzenleActivity.class);
-                intent.putExtra("id", (int)id);
+                intent.putExtra("id", id);
                 startActivity(intent);
             }
         });

@@ -132,7 +132,11 @@ public class UrunArama extends AppCompatActivity {
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
                 }
+                if (item.getItemId() == R.id.cikis) {
+                    finish();
+                    System.exit(0);
 
+                }
 
                 return false;
             }
@@ -155,10 +159,11 @@ public class UrunArama extends AppCompatActivity {
                         query = arama.getText().toString();
                         JSON_URL = "http://tr.wiki.admicos.cf/w/api.php?action=query&prop=extracts|pageimages|pageterm‌​s&piprop=original&format=json&text=&titles="+query;
 
-                       // if (!query.isEmpty()) {
+                        if (!query.isEmpty()) {
                             // Toast.makeText(getApplicationContext(), query, Toast.LENGTH_SHORT).show();
                             new Downloadjson().execute();
-                       // }
+                        }
+                        else Toast.makeText(getApplicationContext(), "Ne Arıyorsun ??", Toast.LENGTH_SHORT).show();
 
                         return true;
                     }
@@ -250,13 +255,24 @@ public class UrunArama extends AppCompatActivity {
                     JSONObject parse = parse2.getJSONObject("pages");
                     Iterator<String> keys = parse2.getJSONObject("pages").keys();
                     String str_Name = keys.next();
+
                     //System.out.println("BURASIKEYS " + str_Name);
                     JSONObject parse3 = parse.getJSONObject(str_Name);
                     text = parse3.getString("extract");
+                    ///**VERİ GELMEZSE EGER
+                    if(text==null){
 
+                        text="";
+                        Toast.makeText(getApplicationContext(), "Bulunamadı", Toast.LENGTH_SHORT).show();
+
+
+                    }
                     JSONObject resim=parse3.getJSONObject("original");
                     resim_url=resim.getString("source");
-
+                    //*RESİM YOKSA NULL olacak string boşlayıp aşagıda kontrolu yapılacak
+                    if(resim_url==null){
+                        resim_url="";
+                    }
 
                 } catch (JSONException e) {
                     e.getMessage();
@@ -281,6 +297,13 @@ public class UrunArama extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Bulunamadı", Toast.LENGTH_SHORT).show();
 
             }
+            else if(resim_url==null){
+
+
+                String resim2="https://www.sariyerhaberler.com/wp-content/uploads/2017/10/gulhanede-otel-iangini.png";
+                Picasso.with(getApplicationContext()).load(resim2).fit().into(image);
+            }
+
             else {
                 Picasso.with(getApplicationContext()).load(resim_url).fit().into(image);
                 webview.setWebViewClient(new WebViewClient());

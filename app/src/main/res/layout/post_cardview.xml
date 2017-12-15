@@ -6,7 +6,7 @@
     android:layout_marginBottom="5dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    android:background="@color/Seashell"
+    android:background="@color/WhiteSmoke"
     android:layout_marginTop="5dp">
 
     <android.support.v7.widget.CardView

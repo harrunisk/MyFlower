@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +46,49 @@ public class Login extends AppCompatActivity {
 
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         editor = preferences.edit(); //
+        pasword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+
+pasword.setOnTouchListener(new View.OnTouchListener() {
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        final int DRAWABLE_LEFT = 0;
+        final int DRAWABLE_TOP = 1;
+        final int DRAWABLE_RIGHT = 2;
+        final int DRAWABLE_BOTTOM = 3;
+        if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+            if (motionEvent.getRawX() >= (pasword.getRight() - pasword.getCompoundDrawables()[DRAWABLE_RIGHT].
+                    getBounds().width())) {
+
+                if(pasword.getInputType()==(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)){
+
+                    pasword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                    pasword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.unlocked, 0);
+                    pasword.setSelection(pasword.getText().length());
+
+                }
+                    else {
+                    pasword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+                    pasword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.padlock, 0);
+                    pasword.setSelection(pasword.getText().length());
+                }
+
+
+            return true;
+            }
+
+
+
+        }
+
+
+
+
+
+        return false;
+    }
+});
 
         String mail = preferences.getString("email", "");
         username.setText(mail);
@@ -111,7 +156,11 @@ public class Login extends AppCompatActivity {
                         editor.putBoolean("login", true);
                         Intent i = new Intent(Login.this, AnasayfaActivity.class);
                         i.putExtra("username", inputEmail);
+                        finish();
                         startActivity(i);
+                        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+
+
 
                         editor.putString("email", inputEmail);//email değeri
                         editor.putString("sifre", inputPassword);//şifre değeri
@@ -134,11 +183,7 @@ public class Login extends AppCompatActivity {
 
     public boolean InternetKontrol() {
         ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (manager.getActiveNetworkInfo() != null && manager.getActiveNetworkInfo().isAvailable() && manager.getActiveNetworkInfo().isConnected()) {
-            return true;
-        } else {
-            return false;
-        }
+        return manager.getActiveNetworkInfo() != null && manager.getActiveNetworkInfo().isAvailable() && manager.getActiveNetworkInfo().isConnected();
     }
 }
 

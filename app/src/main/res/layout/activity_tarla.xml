@@ -43,7 +43,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="14dp"
-        app:backgroundTint="@color/BlueViolet"
+        app:backgroundTint="@color/DarkSlateGray2"
         android:src="@drawable/menu" />
         <include layout="@layout/fab_layout" />
 
