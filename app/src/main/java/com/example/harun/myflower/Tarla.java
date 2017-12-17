@@ -80,13 +80,7 @@ public class Tarla extends AppCompatActivity {
                 String ekim = tarlaArrayList.get(i).getTvEkim();
                 String id = tarlaArrayList.get(i).getId();
 
-                Toast.makeText(getApplicationContext(), "AL BU DEĞERLERİ TEPE TEPE KULLAN REİS " + "\nTarla ADi :" + tarlaadi
-                                + "\nürün  " + tarlaurun
-                                + "\ncesit  " + cesit
-                                + "\nhasat  " + hasat
-                                + "\nekim  :" + ekim
-                                + "\nIDDEGERi  :" + id
-                        , Toast.LENGTH_LONG).show();
+
 
                 Intent intent = new Intent(Tarla.this, TarlaBilgi1.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

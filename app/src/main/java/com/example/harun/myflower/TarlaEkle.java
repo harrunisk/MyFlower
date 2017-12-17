@@ -193,25 +193,32 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
         final ArrayList<String> urunListe = new ArrayList<String>();
 
         urunListe.add("Ürün");
-        urunListe.add("Arbosona");
-        urunListe.add("Çeşit1");
-        urunListe.add("Çeşit2");
+        urunListe.add("Elma");
+        urunListe.add("Zeytin");
+        urunListe.add("Greyfurt");
 
         final ArrayList<String> mahsulListe = new ArrayList<String>();
         mahsulListe.add("Ürün Çeşidi");
-        mahsulListe.add("elma");
-        mahsulListe.add("armut");
-        mahsulListe.add("zeytin");
+        mahsulListe.add("Vista Bella");
+        mahsulListe.add("Pink Lady");
+        mahsulListe.add("Golden Reinders");
         final ArrayList<String> toprakListe = new ArrayList<String>();
         toprakListe.add("Toprak Tipi");
-        toprakListe.add("elma");
-        toprakListe.add("armut");
-        toprakListe.add("zeytin");
+        toprakListe.add("Killi");
+        toprakListe.add("Humuslu");
+        toprakListe.add("Kireçli Toprak");
+        toprakListe.add("Kumlu Toprak");
+        toprakListe.add("Torf Toprak");
+        toprakListe.add("Komposto Toprak");
+
+
         final ArrayList<String> sulamaListe = new ArrayList<String>();
         sulamaListe.add("Sulama Tipi");
-        sulamaListe.add("elma");
-        sulamaListe.add("armut");
-        sulamaListe.add("zeytin");
+        sulamaListe.add("Salma Sulama");
+        sulamaListe.add("Damlama");
+        sulamaListe.add("Karık Sulama");
+        sulamaListe.add("Basınçsız Borulu Sulama");
+
 
         /***View PAger BÖLÜMÜ ***/
         mViewPager = (ViewPager) findViewById(R.id.viewPager);

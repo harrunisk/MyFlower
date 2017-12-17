@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Parola"
-            android:inputType="textVisiblePassword"
+            android:inputType="textPassword"
             android:paddingLeft="5dp"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
