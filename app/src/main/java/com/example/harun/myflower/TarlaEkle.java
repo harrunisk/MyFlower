@@ -126,38 +126,11 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
                         //  menuItem.setIcon(ContextCompat.getDrawable(getApplicationContext(), R.drawable.add));
                         /***BOS OLUP OLMADIKLARINN KONTROLU **/
 
-                        tarlaUrun = mCardAdapter.urun;
-                        tarlaUrunCesid = mCardAdapter.urunCesidi;
-                        tarlaToprak = mCardAdapter.toprakTipi;
-                        tarlaSulama = mCardAdapter.sulamaTipi;
+                      if(!kontrol()){
 
-
-                        if (TextUtils.isEmpty(tarla_name.getText())) {
-                            tarla_name.setError("Tarla Adı Girin");
-
-
-                        } else if (TextUtils.isEmpty(tarla_buyuklugu.getText())) {
-
-                            tarla_buyuklugu.setError("Tarla Büyüklüğü Giriniz");
-
-                        } else if (TextUtils.isEmpty(verim.getText())) {
-                            verim.setError("Verim Beklentinizi Giriniz ");
-                        } else if (TextUtils.isEmpty(tarlaUrun)) {
-                            Toast.makeText(getApplicationContext(), "Mahsul Tipi Seçiniz ", Toast.LENGTH_SHORT).show();
-
-                        } else if (TextUtils.isEmpty(tarlaUrunCesid)) {
-                            Toast.makeText(getApplicationContext(), "Ürün Çeşidi Seçiniz ", Toast.LENGTH_SHORT).show();
-                        } else if (TextUtils.isEmpty(tarlaToprak)) {
-                            Toast.makeText(getApplicationContext(), "ToprakTipi Seçiniz ", Toast.LENGTH_SHORT).show();
-                        } else if (TextUtils.isEmpty(tarlaSulama)) {
-                            Toast.makeText(getApplicationContext(), "Sulama Tipi Seçiniz ", Toast.LENGTH_SHORT).show();
-                        } else if (TextUtils.isEmpty(tarlaYer)) {
-                            map.setError("Tarla Yeri Seçiniz");
-                        } else if (TextUtils.isEmpty(tarlaHasatTarih)) {
-                            hasat_tarih.setError("Hasat Tarihi Seçiniz");
-                        } else if (TextUtils.isEmpty(tarlaEkimTarih)) {
-                            ekim_tarih.setError("Ekim Tarihi Seçiniz");
-                        }
+                          //***False gelirse buradaa dur ....
+                          return false;
+                      }
 
                         /*************TUM HERSEY TAMAMSA EKLEME GERCEKLESTIRLECEK**********///
                         else {
@@ -266,7 +239,7 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
                 );
 
                 datePickerDialog.setMinDate(Calendar.getInstance());
-                datePickerDialog.setAccentColor(Color.parseColor("#FF8C00"));
+                datePickerDialog.setAccentColor(Color.parseColor("#2F4F4F"));
                 datePickerDialog.setThemeDark(false); //set dark them for dialog?
                 datePickerDialog.vibrate(true); //vibrate on choosing date?
                 datePickerDialog.dismissOnPause(true); //dismiss dialog when onPause() called?
@@ -298,7 +271,7 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
                 );
 
                 datePickerDialog.setMinDate(Calendar.getInstance());
-                datePickerDialog.setAccentColor(Color.parseColor("#FF8C00"));
+                datePickerDialog.setAccentColor(Color.parseColor("#2F4F4F"));
                 datePickerDialog.setThemeDark(false); //set dark them for dialog?
                 datePickerDialog.vibrate(true); //vibrate on choosing date?
                 datePickerDialog.dismissOnPause(true); //dismiss dialog when onPause() called?
@@ -320,9 +293,76 @@ public class TarlaEkle extends AppCompatActivity implements DatePickerDialog.OnD
             }
         });
 
+
     }
 
+    public boolean kontrol() {
+        boolean kontrol = true;
+        tarlaUrun = mCardAdapter.urun;
+        tarlaUrunCesid = mCardAdapter.urunCesidi;
+        tarlaToprak = mCardAdapter.toprakTipi;
+        tarlaSulama = mCardAdapter.sulamaTipi;
 
+
+        if (TextUtils.isEmpty(tarla_name.getText())) {
+            tarla_name.setError("Tarla Adı Girin");
+            kontrol = false;
+        }
+        else {
+            tarla_name.setError(null);
+
+        }
+        if (TextUtils.isEmpty(tarla_buyuklugu.getText())) {
+
+            tarla_buyuklugu.setError("Tarla Büyüklüğü Giriniz");
+            kontrol = false;
+        }
+        else{
+            tarla_buyuklugu.setError(null);
+        }
+        if (TextUtils.isEmpty(verim.getText())) {
+            verim.setError("Verim Beklentinizi Giriniz ");
+            kontrol = false;
+        }
+        else
+        {
+            verim.setError(null);
+
+        }
+        if (TextUtils.isEmpty(tarlaUrun)) {
+            Toast.makeText(getApplicationContext(), "Mahsul Tipi Seçiniz ", Toast.LENGTH_SHORT).show();
+            kontrol = false;
+        } else if (TextUtils.isEmpty(tarlaUrunCesid)) {
+            Toast.makeText(getApplicationContext(), "Ürün Çeşidi Seçiniz ", Toast.LENGTH_SHORT).show();
+            kontrol = false;
+        } else if (TextUtils.isEmpty(tarlaToprak)) {
+            Toast.makeText(getApplicationContext(), "ToprakTipi Seçiniz ", Toast.LENGTH_SHORT).show();
+            kontrol = false;
+        } else if (TextUtils.isEmpty(tarlaSulama)) {
+            Toast.makeText(getApplicationContext(), "Sulama Tipi Seçiniz ", Toast.LENGTH_SHORT).show();
+            kontrol = false;
+        }
+        if (TextUtils.isEmpty(tarlaYer)) {
+            map.setError("Tarla Yeri Seçiniz");
+            kontrol = false;
+        } else{
+            map.setError(null);
+        }
+        if (TextUtils.isEmpty(tarlaHasatTarih)) {
+            hasat_tarih.setError("Hasat Tarihi Seçiniz");
+            kontrol = false;
+        }
+        else{
+            hasat_tarih.setError(null);
+        }
+        if (TextUtils.isEmpty(tarlaEkimTarih)) {
+            ekim_tarih.setError("Ekim Tarihi Seçiniz");
+            kontrol = false;
+        }else{
+            ekim_tarih.setError(null);
+        }
+        return kontrol;
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

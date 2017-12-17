@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/edittext2"
+                    android:background="@drawable/textview_back"
                     android:drawableRight="@drawable/sensor2"
                     android:padding="10dp"
                     android:text="Sensörler"
@@ -435,12 +435,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
 
-                    android:background="@drawable/edittext2"
+                    android:background="@drawable/textview_back"
                     android:padding="10dp"
                     android:text="Tarla Düzenle"
                     android:textAllCaps="false"
-                    android:textColor="@color/OrangeRed"
-                    android:textColorHint="@color/OrangeRed"
                     tools:textAllCaps="false" />
 
                 <Button
@@ -449,12 +447,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
 
-                    android:background="@drawable/edittext2"
+                    android:background="@drawable/textview_back"
                     android:padding="10dp"
                     android:text="Tarla Sil"
                     android:textAllCaps="false"
-                    android:textColor="@color/OrangeRed"
-                    android:textColorHint="@color/OrangeRed"
                     tools:textAllCaps="false"
 
                     />

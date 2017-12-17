@@ -30,16 +30,14 @@ public class Haberler extends AppCompatActivity {
     private String TAG = getClass().getSimpleName();
 
     //private String RSS_URL = "http://webrazzi.com/feed/";
-   // private String RSS_URL ="https://etarim.net/feed";
-   // private String RSS_URL ="http://gidatarim.com/feed"
-   // private String RSS_URL ="http://www.gthbhaber.com/feed/";
+    // private String RSS_URL ="https://etarim.net/feed";
+    // private String RSS_URL ="http://gidatarim.com/feed"
+    // private String RSS_URL ="http://www.gthbhaber.com/feed/";
     //private String RSS_URL ="http://www.haberturk.com/rss";
     //private String RSS_URL ="https://www.canlihaber.com/rss/";
-  //  private String RSS_URL ="http://www.dipnot.tv/feed/";
-   // private String RSS_URL ="http://www.kampushaber.com/rss.xml";
-    private String RSS_URL ="http://www.turkiyehaberajansi.com/rss.xml";
-
-
+    //  private String RSS_URL ="http://www.dipnot.tv/feed/";
+    // private String RSS_URL ="http://www.kampushaber.com/rss.xml";
+    private String RSS_URL = "http://www.turkiyehaberajansi.com/rss.xml";
 
 
     // XML İ / RSS İ ÇEKTİRİP AYRIŞTIRACAĞIMIZ SINIFIMIZ
@@ -56,25 +54,24 @@ public class Haberler extends AppCompatActivity {
     private PostAdapter adapter;
     private DrawerLayout mDrawer;
     private ActionBarDrawerToggle toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activty_haberler2);
-        mDrawer=(DrawerLayout)findViewById(R.id.drawer);
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer);
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         editor = preferences.edit(); //
 
 
-
-
-        toolbar=new ActionBarDrawerToggle(this,mDrawer,R.string.open,R.string.kapa);
+        toolbar = new ActionBarDrawerToggle(this, mDrawer, R.string.open, R.string.kapa);
         mDrawer.addDrawerListener(toolbar);
         toolbar.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Haberler");
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
-        username=(TextView)navigationView.getHeaderView(0).findViewById(R.id.username);
+        username = (TextView) navigationView.getHeaderView(0).findViewById(R.id.username);
 
         final String mail = preferences.getString("email", "");
         username.setText(mail);
@@ -88,25 +85,25 @@ public class Haberler extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 mDrawer.closeDrawers();
-                if(item.getItemId()==R.id.haber){
+                if (item.getItemId() == R.id.haber) {
                     Intent intent = new Intent(Haberler.this, Haberler.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
                     finish();
+                    startActivity(intent);
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                 }
-                if(item.getItemId()==R.id.Anasayfa){
+                if (item.getItemId() == R.id.Anasayfa) {
                     Intent intent = new Intent(Haberler.this, AnasayfaActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra("username",mail);
-finish();
+                    // intent.putExtra("username", mail);
+                    finish();
                     startActivity(intent);
                 }
 
-                if(item.getItemId()==R.id.add_tarla) {
+                if (item.getItemId() == R.id.add_tarla) {
                     Intent intent = new Intent(Haberler.this, TarlaEkle.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra("username",mail);
+                    //  intent.putExtra("username", mail);
 
                     startActivity(intent);
                     finish();
@@ -114,10 +111,10 @@ finish();
 
                 }
 
-                if(item.getItemId()==R.id.tarla) {
+                if (item.getItemId() == R.id.tarla) {
                     Intent intent = new Intent(Haberler.this, Tarla.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra("username",mail);
+                    //intent.putExtra("username", mail);
                     startActivity(intent);
                     finish();
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
@@ -132,13 +129,16 @@ finish();
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
                 }
+                if (item.getItemId() == R.id.cikis) {
+                    finish();
+                    System.exit(0);
+
+                }
 
 
                 return false;
             }
         });
-
-
 
 
         pullAndParseXML = new PullAndParseXML(RSS_URL);
@@ -147,13 +147,13 @@ finish();
         while (pullAndParseXML.parsingComplete) ;
         posts = pullAndParseXML.getPostList().subList(1, pullAndParseXML.getPostList().size());
 
-            for (int i = 0; i < posts.size(); i++) {
-              Log.i(TAG, "title #" + (i + 1) + " > : " + posts.get(i).getTitle());
-             Log.i(TAG, "image #" + (i + 1) + " > : " + posts.get(i).getImageUrl());
-             }
+        for (int i = 0; i < posts.size(); i++) {
+            Log.i(TAG, "title #" + (i + 1) + " > : " + posts.get(i).getTitle());
+            Log.i(TAG, "image #" + (i + 1) + " > : " + posts.get(i).getImageUrl());
+        }
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_haberler);
-        adapter=new PostAdapter(this,posts);
+        adapter = new PostAdapter(this, posts);
 
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -162,9 +162,10 @@ finish();
 
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(toolbar.onOptionsItemSelected(item)){
+        if (toolbar.onOptionsItemSelected(item)) {
 
 
             return true;

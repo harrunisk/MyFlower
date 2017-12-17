@@ -43,8 +43,7 @@ public class AnasayfaActivity extends AppCompatActivity {
         mDrawer.addDrawerListener(toolbar);
         toolbar.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
+        //getSupportActionBar().setBackgroundResource(Color.TRANSPARENT);
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
         username2 = (TextView) navigationView.getHeaderView(0).findViewById(R.id.username);
 
@@ -66,22 +65,24 @@ public class AnasayfaActivity extends AppCompatActivity {
         String mail = preferences.getString("email", "");
         username.setText(mail);*/
 
-      urun.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
+        urun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-              Intent intent = new Intent(AnasayfaActivity.this, UrunArama.class);
-              intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-              startActivity(intent);
+                Intent intent = new Intent(AnasayfaActivity.this, UrunArama.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
-          }
-      });
+            }
+        });
         haber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AnasayfaActivity.this, Haberler.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
             }
         });
 
@@ -90,8 +91,9 @@ public class AnasayfaActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(AnasayfaActivity.this, Tarla.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-              // intent.putExtra("username", username2);
+                // intent.putExtra("username", username2);
                 startActivity(intent);
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
             }
         });
 
@@ -106,6 +108,7 @@ public class AnasayfaActivity extends AppCompatActivity {
                     Intent intent = new Intent(AnasayfaActivity.this, Haberler.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                 }
                 if (item.getItemId() == R.id.Anasayfa) {
                     Intent intent = new Intent(AnasayfaActivity.this, AnasayfaActivity.class);
@@ -113,6 +116,7 @@ public class AnasayfaActivity extends AppCompatActivity {
                     //intent.putExtra("username", username2);
 
                     startActivity(intent);
+                    overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
                 }
                 if (item.getItemId() == R.id.add_tarla) {
                     Intent intent = new Intent(AnasayfaActivity.this, TarlaEkle.class);
@@ -126,13 +130,13 @@ public class AnasayfaActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.tarla) {
                     Intent intent = new Intent(AnasayfaActivity.this, Tarla.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                   // intent.putExtra("username", username2);
+                    // intent.putExtra("username", username2);
 
                     startActivity(intent);
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
                 }
-                if (item.getItemId()==R.id.mahsül){
+                if (item.getItemId() == R.id.mahsül) {
                     Intent intent = new Intent(AnasayfaActivity.this, UrunArama.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     // intent.putExtra("username", username2);
@@ -141,7 +145,11 @@ public class AnasayfaActivity extends AppCompatActivity {
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
                 }
+                if (item.getItemId() == R.id.cikis) {
+                    finish();
+                    System.exit(0);
 
+                }
                 return false;
             }
         });

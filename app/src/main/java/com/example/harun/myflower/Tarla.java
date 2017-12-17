@@ -212,6 +212,11 @@ public class Tarla extends AppCompatActivity {
                     overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
 
                 }
+                if (item.getItemId() == R.id.cikis) {
+                    finish();
+                    System.exit(0);
+
+                }
                 return false;
             }
         });
